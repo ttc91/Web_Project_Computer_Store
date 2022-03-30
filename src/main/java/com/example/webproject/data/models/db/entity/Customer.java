@@ -1,11 +1,11 @@
-package com.example.webproject.data.models.db;
+package com.example.webproject.data.models.db.entity;
 
+import com.example.webproject.data.models.db.entity.Bill;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package com.example.webproject.data.models.db;
+package com.example.webproject.data.models.db.entity;
 
 
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
-package com.example.webproject.data.models.db;
+package com.example.webproject.data.models.db.entity;
 
+import com.example.webproject.data.models.db.entity.Bill;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,6 @@ public class BillDetail {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @OneToOne
-    @Column(name = "billId", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
     private Bill bill;
 }

@@ -1,4 +1,4 @@
-package com.example.webproject.data.models.db;
+package com.example.webproject.data.models.db.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,9 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Set;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,16 +17,7 @@ public class Cart implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartId;
 
-    @Column(nullable = false)
-    private Long quantity;
-
-    @Column(nullable = false)
-    private BigDecimal totalPrice;
-
-    @OneToMany
-    private Set<Product> products;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
 }

@@ -1,28 +1,28 @@
-package com.example.webproject.data.models.db;
+package com.example.webproject.data.models.db.entity;
 
-import com.sun.istack.NotNull;
+import com.example.webproject.data.models.db.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tbl_image")
-public class Image implements Serializable {
+@Table(name = "tbl_rate")
+public class Rate implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long imageId;
+    private Long rateId;
 
-    @NotEmpty
-    @NotNull
-    private String imageLink;
+    private Long avgStart;
+
+    @Column(length = 200, columnDefinition = "nvarchar(200)")
+    private String contentRate;
 
     @ManyToOne()
     @JoinColumn(name = "productId")
