@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,5 +21,8 @@ public class Cart implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Customer customer;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private Set<CartProduct> cartProducts;
 
 }

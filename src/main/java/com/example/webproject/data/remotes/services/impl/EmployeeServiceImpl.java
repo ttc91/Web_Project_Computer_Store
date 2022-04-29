@@ -18,6 +18,9 @@ import java.util.function.Function;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+    @Autowired
+    private EmployeeRepository repository;
+
     @Override
     public List<Employee> findAll() {
         return repository.findAll();
@@ -113,7 +116,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return repository.findBy(example, queryFunction);
     }
 
-    @Autowired
-    private EmployeeRepository repository;
+
 
 }

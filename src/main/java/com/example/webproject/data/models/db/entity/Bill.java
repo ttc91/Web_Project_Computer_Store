@@ -32,6 +32,5 @@ public class Bill {
     private Customer customer;
 
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
-    private Set<Product> products;
-
+    private Set<BillDetail> billDetails;
 }

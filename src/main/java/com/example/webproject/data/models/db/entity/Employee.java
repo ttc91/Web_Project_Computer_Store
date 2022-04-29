@@ -34,7 +34,7 @@ public class Employee implements Serializable {
     @Column(length = 100, nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
