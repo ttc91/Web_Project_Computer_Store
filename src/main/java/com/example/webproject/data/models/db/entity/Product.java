@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -28,10 +29,14 @@ public class Product implements Serializable {
     private String productName;
 
     @NotEmpty
+    @Length(max = 1000)
     private String productContent;
 
-    @NotEmpty
+    @NotNull
     private double productPrice;
+
+    @NotEmpty
+    private String productAvatar;
 
     @Value("0.0")
     private double productDiscount;
