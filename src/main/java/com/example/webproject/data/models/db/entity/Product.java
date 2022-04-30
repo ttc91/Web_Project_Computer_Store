@@ -35,6 +35,8 @@ public class Product implements Serializable {
     @NotNull
     private double productPrice;
 
+    private Long numOfSell;
+
     @NotEmpty
     private String productAvatar;
 

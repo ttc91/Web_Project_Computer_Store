@@ -5,6 +5,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.FluentQuery;
 
 import java.util.List;
@@ -73,4 +74,14 @@ public interface ProductService {
     <S extends Product> boolean exists(Example<S> example);
 
     <S extends Product, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction);
+
+    @Query(value = "SELECT * FROM tbl_product ORDER BY product_id DESC LIMIT 4", nativeQuery = true)
+    List<Product> getTop4NewProduct();
+
+    @Query(value = "SELECT * FROM tbl_product ORDER BY num_of_sell DESC LIMIT 1", nativeQuery = true)
+    Product getTopSellProduct();
+
+
+    @Query(value = "SELECT * FROM tbl_product ORDER BY num_of_sell DESC LIMIT 4", nativeQuery = true)
+    List<Product> getTop4BestProduct();
 }

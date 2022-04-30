@@ -19,8 +19,14 @@ public class HomeController {
     @RequestMapping("/")
     public String index(Model model) {
 
-        List<Product> productList = productService.findAll();
+        List<Product> productList = productService.getTop4NewProduct();
         model.addAttribute("products", productList);
+
+        Product topSellProduct = productService.getTopSellProduct();
+        model.addAttribute("topSellProduct", topSellProduct);
+
+        List<Product> productBestList = productService.getTop4BestProduct();
+        model.addAttribute("productsBest", productBestList);
 
         return "index";
     }

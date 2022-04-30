@@ -8,6 +8,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 
@@ -175,5 +176,23 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public <S extends Product, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return repository.findBy(example, queryFunction);
+    }
+
+    @Override
+    @Query(value = "SELECT * FROM tbl_product ORDER BY product_id DESC LIMIT 4", nativeQuery = true)
+    public List<Product> getTop4NewProduct() {
+        return repository.getTop4NewProduct();
+    }
+
+    @Override
+    @Query(value = "SELECT * FROM tbl_product ORDER BY num_of_sell DESC LIMIT 1", nativeQuery = true)
+    public Product getTopSellProduct() {
+        return repository.getTopSellProduct();
+    }
+
+    @Override
+    @Query(value = "SELECT * FROM tbl_product ORDER BY num_of_sell DESC LIMIT 4", nativeQuery = true)
+    public List<Product> getTop4BestProduct() {
+        return repository.getTop4BestProduct();
     }
 }
