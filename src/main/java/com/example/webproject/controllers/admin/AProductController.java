@@ -1,7 +1,7 @@
 package com.example.webproject.controllers.admin;
 
-import com.example.webproject.data.models.db.entity.Employee;
-import com.example.webproject.data.remotes.services.EmployeeService;
+import com.example.webproject.data.models.db.entity.Product;
+import com.example.webproject.data.remotes.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("admin/employee")
-public class EmployeeController {
+@RequestMapping("admin/product")
+public class AProductController {
 
     @Autowired
-    private EmployeeService service;
+    ProductService service;
 
-    @PostMapping("add")
-    public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee employee){
-        service.save(employee);
-        return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+    @PostMapping("/add_product")
+    public ResponseEntity<Product> insertProduct(@Valid @RequestBody Product product){
+        service.save(product);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
+
 
 
 }

@@ -9,10 +9,9 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartProductDto implements Serializable {
+public class CategoryDto implements Serializable {
 
-    private Long cartId;
-    private Long productId;
-    private Long quantity;
+    private Long id;
+    private String categoryName;
 
 }
