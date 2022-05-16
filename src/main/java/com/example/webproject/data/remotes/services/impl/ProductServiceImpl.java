@@ -207,4 +207,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductByCategoryId(Long name) {
         return repository.getProductByCategoryId(name);
     }
+
+    @Override
+    @Query(value = "SELECT * FROM tbl_product WHERE product_name LIKE %?1%", nativeQuery = true)
+    public List<Product> getProductByProductChar(String productChar) {
+        return repository.getProductByProductChar(productChar);
+    }
 }

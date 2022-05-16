@@ -62,4 +62,21 @@ public class ProductController {
         return new ModelAndView("category", model);
     }
 
+    @RequestMapping("/search")
+    public ModelAndView navigateProductPageBySearchString(ModelMap model, @RequestParam(value = "char", required = false) String productChar){
+
+        List<Category> categoryList = categoryService.findAll();
+        model.addAttribute("categories", categoryList);
+
+        List<Product> productList = productService.getProductByProductChar(productChar);
+        model.addAttribute("products", productList);
+
+        Product lastProduct = productService.getLastProduct();
+        model.addAttribute("lastProduct", lastProduct);
+
+        model.addAttribute("productContent", "Kết quả tìm kiếm sản phẩm");
+
+        return new ModelAndView("category", model);
+    }
+
 }

@@ -90,4 +90,7 @@ public interface ProductService {
 
     @Query(value = "SELECT * FROM tbl_product WHERE category_id = ?1", nativeQuery = true)
     List<Product> getProductByCategoryId(Long name);
+
+    @Query(value = "SELECT * FROM tbl_product WHERE product_name LIKE %?1%", nativeQuery = true)
+    List<Product> getProductByProductChar(String productChar);
 }
