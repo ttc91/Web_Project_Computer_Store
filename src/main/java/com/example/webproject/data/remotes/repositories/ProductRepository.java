@@ -19,5 +19,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM tbl_product ORDER BY num_of_sell DESC LIMIT 4", nativeQuery = true)
     List<Product> getTop4BestProduct();
 
+    @Query(value = "SELECT * FROM tbl_product ORDER BY product_id DESC LIMIT 1", nativeQuery = true)
+    Product getLastProduct();
+
+    @Query(value = "SELECT * FROM tbl_product WHERE category_id = ?1", nativeQuery = true)
+    List<Product> getProductByCategoryId(Long name);
+
 
 }

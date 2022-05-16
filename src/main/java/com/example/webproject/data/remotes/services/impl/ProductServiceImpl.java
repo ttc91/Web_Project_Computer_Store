@@ -195,4 +195,16 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getTop4BestProduct() {
         return repository.getTop4BestProduct();
     }
+
+    @Override
+    @Query(value = "SELECT * FROM tbl_product ORDER BY product_id DESC LIMIT 1", nativeQuery = true)
+    public Product getLastProduct() {
+        return repository.getLastProduct();
+    }
+
+    @Override
+    @Query(value = "SELECT * FROM tbl_product WHERE category_id = ?1", nativeQuery = true)
+    public List<Product> getProductByCategoryId(Long name) {
+        return repository.getProductByCategoryId(name);
+    }
 }

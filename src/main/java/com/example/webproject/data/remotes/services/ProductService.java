@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public interface ProductService {
+
     List<Product> findAll();
 
     List<Product> findAll(Sort sort);
@@ -81,7 +82,12 @@ public interface ProductService {
     @Query(value = "SELECT * FROM tbl_product ORDER BY num_of_sell DESC LIMIT 1", nativeQuery = true)
     Product getTopSellProduct();
 
-
     @Query(value = "SELECT * FROM tbl_product ORDER BY num_of_sell DESC LIMIT 4", nativeQuery = true)
     List<Product> getTop4BestProduct();
+
+    @Query(value = "SELECT * FROM tbl_product ORDER BY product_id DESC LIMIT 1", nativeQuery = true)
+    Product getLastProduct();
+
+    @Query(value = "SELECT * FROM tbl_product WHERE category_id = ?1", nativeQuery = true)
+    List<Product> getProductByCategoryId(Long name);
 }
