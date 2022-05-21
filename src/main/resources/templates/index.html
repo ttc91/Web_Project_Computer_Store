@@ -29,25 +29,20 @@
                     <a class="nav-link" href="/product/">Sản phẩm</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="product.html">Giỏ hàng</a>
+                    <a class="nav-link" href="/cart/">Giỏ hàng</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Tương tác</a>
+                <li th:if="${checkLogin}" class="nav-item">
+                    <a class="nav-link" href="contact.html">Xin chào [[${customer.customerName}]]</a>
+                </li>
+                <li th:if="${!checkLogin}" class="nav-item">
+                    <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
                 </li>
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary btn-number">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <a class="btn btn-success btn-sm ml-3" href="cart.html">
+                <a class="btn btn-success btn-sm ml-3" href="/cart/">
                     <i class="fa fa-shopping-cart"></i> Cart
-                    <span class="badge badge-light">3</span>
+                    <span class="badge badge-light">[[${numOfProductInCart}]]</span>
                 </a>
             </form>
         </div>
@@ -138,7 +133,7 @@
                                                 <p class="btn btn-danger btn-block">[[${product.productPrice}]]</p>
                                             </div>
                                             <div class="col">
-                                                <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
+                                                <a th:href="@{'/cart/add'('p_id' = ${product.productId})}" class="btn btn-success btn-block">Add to cart</a>
                                             </div>
                                         </div>
                                     </div>

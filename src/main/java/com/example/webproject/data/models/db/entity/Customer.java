@@ -26,10 +26,10 @@ public class Customer implements Serializable {
     @Column(length = 200)
     private String customerAddress;
 
-    @Column(length = 50, columnDefinition = "nvarchar(50) not null")
+    @Column(length = 50, columnDefinition = "nvarchar(250) not null")
     private String customerPassword;
 
-    @Column(length = 10)
+    @Column(length = 10, unique = true)
     private String customerPhoneNumber;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")

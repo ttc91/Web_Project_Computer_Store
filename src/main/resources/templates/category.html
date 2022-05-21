@@ -29,10 +29,16 @@
                     <a class="nav-link" href="/product/">Sản phẩm</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cart.html">Giỏ hàng</a>
+                    <a class="nav-link" href="/cart/">Giỏ hàng</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contact.html">Tương tác</a>
+                </li>
+                <li th:if="${checkLogin}" class="nav-item">
+                    <a class="nav-link" href="contact.html">Xin chào [[${customer.customerName}]]</a>
+                </li>
+                <li th:if="${!checkLogin}" class="nav-item">
+                    <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
                 </li>
             </ul>
 
@@ -101,7 +107,7 @@
                         <div class="card">
                             <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
                             <div class="card-body">
-                                <h4 class="card-title"><a href="product.html" title="View Product">[[${product.productName}]]</a></h4>
+                                <h4 class="card-title"><a th:href="@{'/product'('p_id'=${product.productId})}" title="View Product">[[${product.productName}]]</a></h4>
                                 <p class="card-text">[[${product.productContent}]]</p>
                                 <div class="row">
                                     <div class="col">
