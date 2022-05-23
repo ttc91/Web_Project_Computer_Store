@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
-    <title>Simple Login Form</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!--Bootstrap4-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+    <meta charset="UTF-8">
+    <title>Đăng ký</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -51,30 +50,34 @@
         </div>
     </div>
 </nav>
-
-<div class="container">
-
-    <div th:if = "${!check}" class="alert alert-danger" role="alert">
-        Đăng nhập không thành công !
+<div class="container mt-5">
+    <h3 class="text-center">Đăng ký tài khoản</h3>
+<form>
+    <div class="form-group">
+        <label for="exampleInputPhone">Số điện thoại</label>
+        <input type="phone" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" placeholder="Vui lòng nhập số điện thoại">
     </div>
-
-    <form th:action="@{/j_spring_security_check}" class="login_design" method="POST">
-        <h2>Trang đăng nhập</h2><br>
-        <div class="form-group">
-            <label for="phone">Số điện thoại:</label>
-            <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" name="phone">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Mật khẩu:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="pwd">
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="remember"> Remember me</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button><br><br>
-    </form>
+    <div class="form-group">
+        <label for="exampleInputName">Họ và tên</label>
+        <input type="password" class="form-control" id="exampleInputName" placeholder="Vui lòng nhập họ và tên">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Mật khẩu</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Vui lòng nhập mật khẩu">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword2">Xác nhận mật khẩu</label>
+        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Vui lòng xác nhận lại mật khẩu">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputAddress">Địa chỉ</label>
+        <input type="password" class="form-control" id="exampleInputAddress" placeholder="Vui lòng nhập địa chỉ"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </div>
-<footer class="container" style="position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;">
+<footer class="container"
+        style="position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;">
     <div>
         <div class="row">
             <div class="col-md-3 col-lg-4 col-xl-3">

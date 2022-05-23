@@ -15,7 +15,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="index.html">Simple Ecommerce</a>
+        <a class="navbar-brand" href="index.html">CH's Store</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,12 +27,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/product/">Sản phẩm</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cart.html">Giỏ hàng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Tương tác</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Đăng nhập</a>
@@ -53,14 +47,24 @@
                     <span class="badge badge-light">3</span>
                 </a>
             </form>
+            <ul class="navbar-nav m-auto">
+                <li th:if="${checkLogin}" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Xin chào [[${customer.customerName}]]
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Đăng xuất</a>
+                    </div>
+                </li>
+            </ul>
 
         </div>
     </div>
 </nav>
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">E-COMMERCE PRODUCT</h1>
-        <p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500...</p>
+        <h1 class="jumbotron-heading">TRANG WEB THƯƠNG MẠI ĐIỆN TỬ</h1>
+        <p class="lead text-muted mb-0">Được xây dựng bởi Tất Tân Chu và Nguyễn Huy Hòa</p>
     </div>
 </section>
 <div class="container">
@@ -97,7 +101,7 @@
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    <p class="price">[[${product.productName}]]</p>
+                    <h4 class="price">[[${product.productName}]]</h4>
                     <p class="price_discounted">[[${product.productPrice}]]</p>
                     <form method="get" action="cart.html">
                         <a href="cart.html" class="btn btn-success btn-lg btn-block text-uppercase">
@@ -123,57 +127,77 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="card border-light mb-3">
+        <div class="card-header bg-primary text-white text-uppercase">
+            <i class="fa fa-comment"></i> ĐÁNH GIÁ VỀ SẢN PHẨM
+            <div class="mt-4">
+                <form method="POST" action="product_Detail?pro_Id=${id_pro}">
+                    <div class="form-group" >
+                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Họ tên" name="name" value="">
+                    </div>
+                    <div class="form-group">
+
+                        <select class="custom-select" id="inputGroupSelect02" name="rate">
+                            <option selected>Đánh giá bao nhiêu sao</option>
+                            <option value="1">*</option><span class="fas fa-star" style="color: #F0E68C;"></span>
+                            <option value="2">**</option>
+                            <option value="3">***</option>
+                            <option value="4">****</option>
+                            <option value="5">*****</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                       <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Mã sản phẩm" name="pro_Id">
+                    </div> -->
+                    <div class="form-group">
+                        <textarea type="text" class="form-control" id="exampleFormControlInput1" placeholder="Đánh giá" name="rate_des"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Đánh giá</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Footer -->
-<footer class="text-light">
-    <div class="container">
+<footer class="container">
+    <div>
         <div class="row">
             <div class="col-md-3 col-lg-4 col-xl-3">
-                <h5>About</h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
                 <p class="mb-0">
-                    Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+                    Cung cấp Laptop, PC, Linh phụ kiện chính hãng
                 </p>
             </div>
 
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
-                <h5>Informations</h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
+
                 <ul class="list-unstyled">
-                    <li><a href="">Link 1</a></li>
-                    <li><a href="">Link 2</a></li>
-                    <li><a href="">Link 3</a></li>
-                    <li><a href="">Link 4</a></li>
+                    <li><a href="hispurchase.jsp">Lịch sử mua hàng</a></li>
+                    <li><a href="insurance.jsp">Chính sách bảo hành</a></li>
+                    <li><a href="returnpro.jsp">Chính sách đổi trả</a></li>
+                    <li><a href="delipay.jsp">Giao hàng và thanh toán</a></li>
                 </ul>
             </div>
 
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
-                <h5>Others links</h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
                 <ul class="list-unstyled">
-                    <li><a href="">Link 1</a></li>
-                    <li><a href="">Link 2</a></li>
-                    <li><a href="">Link 3</a></li>
-                    <li><a href="">Link 4</a></li>
+                    <li><a href="introduce.jsp">Giới thiệu công ty</a></li>
+                    <li><a href="recruitment.jsp">Tuyển dụng</a></li>
+                    <li><a href="feedback.jsp">Gửi góp ý, khiếu nại</a></li>
+                    <li><a href="store.jsp">Tìm cửa hàng gần nhất</a></li>
                 </ul>
             </div>
 
             <div class="col-md-4 col-lg-3 col-xl-3">
-                <h5>Contact</h5>
+                <h5>Thông tin liên hệ </h5>
                 <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
                 <ul class="list-unstyled">
-                    <li><i class="fa fa-home mr-2"></i> My company</li>
-                    <li><i class="fa fa-envelope mr-2"></i> email@example.com</li>
-                    <li><i class="fa fa-phone mr-2"></i> + 33 12 14 15 16</li>
-                    <li><i class="fa fa-print mr-2"></i> + 33 12 14 15 16</li>
+                    <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
+                    <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
+                    <li><i class="fa fa-phone mr-2"></i> 19001523</li>
                 </ul>
-            </div>
-            <div class="col-12 copyright mt-3">
-                <p class="float-left">
-                    <a href="#">Back to top</a>
-                </p>
-                <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a href="https://t-php.fr/43-theme-ecommerce-bootstrap-4.html"><i>t-php</i></a> | <span>v. 1.0</span></p>
             </div>
         </div>
     </div>
@@ -199,6 +223,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- JS -->
 <script src="//code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>

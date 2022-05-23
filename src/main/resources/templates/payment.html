@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <!-- Site meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Laptop Ecommerce</title>
+    <!-- CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            }
+        </style>
+    <!-- Custom styles for this template -->
+    <link href="form-validation.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">CH's Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/product/">Sản phẩm</a>
+                </li>
+                <li th:if="${!checkLogin}" class="nav-item">
+                    <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <a class="btn btn-success btn-sm ml-3" href="/cart/">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                    <span class="badge badge-light">[[${numOfProductInCart}]]</span>
+                </a>
+            </form>
+            <ul class="navbar-nav m-auto">
+                <li th:if="${checkLogin}" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Xin chào [[${customer.customerName}]]
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Đăng xuất</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="text-center">
+    <h2>Thông tin mua hàng</h2>
+</div>
+<div class="container">
+    <div class="col-md-8 order-md-1">
+        <form class="needs-validation" novalidate action="pay" method="post">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="firstName">Họ và tên</label>
+                    <input type="text" class="form-control" id="firstName" name="name" placeholder="Nguyễn Văn A" value="${sessionScope.user.u_FullName }"
+                           required>
+                    <div class="invalid-feedback">
+                        Valid first name is required.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="${sessionScope.user.u_Email }">
+                <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="phone">Số điện thoại</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="you@example.com" value="${sessionScope.user.u_Phone }">
+                <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="address">Địa chỉ giao hàng</label>
+                <textarea type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" value="${sessionScope.user.u_Location }"
+                          required></textarea>
+                <div class="invalid-feedback">
+                    Please enter your shipping address.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="country">Tỉnh thành</label>
+                    <input type="text" class="form-control" id="country" name="tinh" placeholder="Hồ Chí Minh"
+                           required>
+                    <div class="invalid-feedback">
+                        Please select a valid country.
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="state">Thành phố/Huyện/Quận</label>
+                    <input type="text" class="form-control" id="state" name="quanhuyen" placeholder="Quận 1"
+                           required>
+                    <div class="invalid-feedback">
+                        Please provide a valid state.
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="payment">Phương thức thanh toán</label>
+                    <select class="custom-select d-block w-100" id="payment" name="payment" required>
+                        <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
+                        <option value="Chuyển khoản">Chuyển khoản</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid country.
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <button class="btn btn-primary btn-lg btn-block mt-5" type="submit">Tiến hành thanh toán</button>
+        </form>
+    </div>
+</div>
+</div>
+<footer class="container" style="position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;">
+    <div>
+        <div class="row">
+            <div class="col-md-3 col-lg-4 col-xl-3">
+                <p class="mb-0">
+                    Cung cấp Laptop, PC, Linh phụ kiện chính hãng
+                </p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+
+                <ul class="list-unstyled">
+                    <li><a href="hispurchase.jsp">Lịch sử mua hàng</a></li>
+                    <li><a href="insurance.jsp">Chính sách bảo hành</a></li>
+                    <li><a href="returnpro.jsp">Chính sách đổi trả</a></li>
+                    <li><a href="delipay.jsp">Giao hàng và thanh toán</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+                <ul class="list-unstyled">
+                    <li><a href="introduce.jsp">Giới thiệu công ty</a></li>
+                    <li><a href="recruitment.jsp">Tuyển dụng</a></li>
+                    <li><a href="feedback.jsp">Gửi góp ý, khiếu nại</a></li>
+                    <li><a href="store.jsp">Tìm cửa hàng gần nhất</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-3 bg-black">
+                <h5>Thông tin liên hệ </h5>
+                <hr class="mb-2 mt-0 d-inline-block mx-auto w-25">
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
+                    <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
+                    <li><i class="fa fa-phone mr-2"></i> 19001523</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://getbootstrap.com/docs/4.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+        crossorigin="anonymous"></script>
+<script src="https://getbootstrap.com/docs/4.3/examples/checkout/form-validation.js"></script>
+</body>
+</html>
