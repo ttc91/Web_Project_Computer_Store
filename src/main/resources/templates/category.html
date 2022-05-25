@@ -28,9 +28,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/product/">Sản phẩm</a>
                 </li>
-                <li th:if="${!checkLogin}" class="nav-item">
-                    <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
-                </li>
             </ul>
 
             <form th:action = "@{/product/search}" class="form-inline my-2 my-lg-0">
@@ -44,9 +41,17 @@
                 </div>
                 <a class="btn btn-success btn-sm ml-3" href="cart.html">
                     <i class="fa fa-shopping-cart"></i> Cart
-                    <span class="badge badge-light">3</span>
+                    <span class="badge badge-light">[[${numOfProductInCart}]]</span>
                 </a>
             </form>
+            <ul class="navbar-nav m-auto">
+                <li th:if="${!checkLogin}" class="nav-item">
+                    <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
+                </li>
+                <li th:if="${!checkLogin}" class="nav-item">
+                    <a class="nav-link" th:href="@{/login/}">Đăng ký</a>
+                </li>
+            </ul>
             <ul class="navbar-nav m-auto">
                 <li th:if="${checkLogin}" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -81,7 +86,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-12 col-sm-3">
+        <div class="col-3 col-sm-3">
             <div class="card bg-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Loại sản phẩm</div>
                 <ul class="list-group category_block">
@@ -93,25 +98,27 @@
                 </ul>
             </div>
         </div>
-        </div>
-    <div class="row d-flex justify-content-around">
-            <div th:each = "product : ${products}" class="col-12 col-md-6 col-lg-4 mb-3">
-                        <div class="card">
-                            <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
-                            <div class="card-body">
-                                <h4 class="card-title" style="min-height:150px;"><a th:href="@{'/product'('p_id'=${product.productId})}" title="View Product">[[${product.productName}]]</a></h4>
-                                <p class="card-text" style="min-height:200px;">[[${product.productContent}]]</p>
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="btn btn-danger btn-block">[[${product.productPrice}]] VNĐ</p>
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
-                                    </div>
+        <div class="col-9">
+            <div class="row d-flex justify-content-around">
+                <div th:each = "product : ${products}" class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card">
+                        <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
+                        <div class="card-body">
+                            <h4 class="card-title" style="height:150px;"><a th:href="@{'/product'('p_id'=${product.productId})}" title="View Product">[[${product.productName}]]</a></h4>
+                            <p class="card-text" style="height:200px;">[[${product.productContent}]]</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="btn btn-danger btn-block">[[${product.productPrice}]] VNĐ</p>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
             </div>
+        </div>
     </div>
 </div>
     </div>
