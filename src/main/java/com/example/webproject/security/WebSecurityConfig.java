@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         //Link mà người đại diện gõ trên trình duyệt
-        http.authorizeRequests().antMatchers("/", "/product/**").permitAll()
+        http.authorizeRequests().antMatchers("/", "/product/**", "/register/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login/").permitAll()
                 .defaultSuccessUrl("/login?success=true")
@@ -35,6 +35,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("phone")
                 .passwordParameter("pwd")
                 .loginProcessingUrl("/j_spring_security_check");
+
+        http.logout()
+                .logoutUrl("/logout/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
 
     }
 

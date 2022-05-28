@@ -26,9 +26,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/product/">Sản phẩm</a>
                 </li>
-                <li th:if="${!checkLogin}" class="nav-item">
-                    <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
-                </li>
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
@@ -37,46 +34,53 @@
                     <span class="badge badge-light">[[${numOfProductInCart}]]</span>
                 </a>
             </form>
+
             <ul class="navbar-nav m-auto">
-                <li th:if="${checkLogin}" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Xin chào [[${customer.customerName}]]
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Đăng xuất</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
                 </li>
+
             </ul>
+
         </div>
     </div>
 </nav>
 <div class="container mt-5">
+
+    <div th:if = "${check}" class="alert alert-danger mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
+        Mật khẩu đăng nhập không hợp lệ!
+    </div>
+
+    <div th:if = "${checkSignUp}" class="alert alert-success mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
+        Đăng ký thành công!
+    </div>
+
     <h3 class="text-center">Đăng ký tài khoản</h3>
-<form class="border p-5 rounded mx-auto" style="max-width: 500px">
+<form method="POST" th:action="@{/register/sign_up}" class="border p-5 rounded mx-auto" style="max-width: 500px; height: 530px;">
     <div class="form-group">
         <label for="exampleInputPhone">Số điện thoại</label>
-        <input width="50%" type="phone" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" placeholder="Vui lòng nhập số điện thoại">
+        <input width="50%" type="phone" name="phone" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" placeholder="Vui lòng nhập số điện thoại" required>
     </div>
     <div class="form-group">
         <label for="exampleInputName">Họ và tên</label>
-        <input type="password" class="form-control" id="exampleInputName" placeholder="Vui lòng nhập họ và tên">
+        <input type="text" name="username" class="form-control" id="exampleInputName" placeholder="Vui lòng nhập họ và tên" required>
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Mật khẩu</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Vui lòng nhập mật khẩu">
+        <input type="password" name="pwd_1" class="form-control" id="exampleInputPassword1" placeholder="Vui lòng nhập mật khẩu" required>
     </div>
     <div class="form-group">
         <label for="exampleInputPassword2">Xác nhận mật khẩu</label>
-        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Vui lòng xác nhận lại mật khẩu">
+        <input type="password" name="pwd_2" class="form-control" id="exampleInputPassword2" placeholder="Vui lòng xác nhận lại mật khẩu" required>
     </div>
     <div class="form-group">
         <label for="exampleInputAddress">Địa chỉ</label>
-        <input type="password" class="form-control" id="exampleInputAddress" placeholder="Vui lòng nhập địa chỉ"/>
+        <input type="text" name="address" class="form-control" id="exampleInputAddress" placeholder="Vui lòng nhập địa chỉ" required/>
     </div>
     <button type="submit" class="btn btn-primary d-flex justify-content-center mx-auto">Submit</button>
 </form>
 </div>
-<footer  style ="background: #343a40; position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;" >
+<footer class="mt-5" style ="background: #343a40;" >
     <div class="row text-light p-4">
         <div class="col-md-3 col-lg-4 col-xl-3">
             <p class="mb-3">

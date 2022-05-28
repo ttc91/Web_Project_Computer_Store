@@ -15,12 +15,14 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="/">CH's Store</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="col-2">
+            <a class="navbar-brand" href="/">CH's Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse justify-content-end col-6 mx-auto" id="navbarsExampleDefault" style="max-width: 400px;">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
@@ -29,37 +31,33 @@
                     <a class="nav-link" href="/product/">Sản phẩm</a>
                 </li>
             </ul>
-            <form th:action = "@{/product/search}" class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-sm">
-                    <input type="text" name="char" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Tìm kiếm tên sản phẩm...">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary btn-number">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
 
+        </div>
+
+        <div class="col-4" style="display: inherit;">
             <form class="form-inline my-2 my-lg-0">
                 <a class="btn btn-success btn-sm ml-3" href="/cart/">
-                    <i class="fa fa-shopping-cart"></i> Cart
+                    <i class="fa fa-shopping-cart"></i> Giỏ hàng
                     <span class="badge badge-light">[[${numOfProductInCart}]]</span>
                 </a>
             </form>
             <ul class="navbar-nav m-auto">
+
                 <li th:if="${checkLogin}" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         Xin chào [[${customer.customerName}]]
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Đăng xuất</a>
+                        <a th:href="@{/logout/}" class="dropdown-item" href="#">Đăng xuất</a>
                     </div>
                 </li>
+
                 <li th:if="${!checkLogin}" class="nav-item">
                     <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
                 </li>
+                <li class="nav-item" style ="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</li>
                 <li th:if="${!checkLogin}" class="nav-item">
-                    <a class="nav-link" th:href="@{/login/}">Đăng ký</a>
+                    <a class="nav-link" th:href="@{/register/}">Đăng ký</a>
                 </li>
 
             </ul>
@@ -113,7 +111,7 @@
                     <h4 class="card-title text-center">[[${topSellProduct.productName}]]</h4>
                     <div class="row">
                         <div class="col">
-                            <p class="btn btn-danger btn-block">[[${topSellProduct.productPrice}]]</p>
+                            <p class="btn btn-danger btn-block">[[${topSellProduct.productPriceFormat}]] VNĐ</p>
                         </div>
                     </div>
                 </div>
@@ -143,10 +141,10 @@
                                         <p class="card-text" style="min-height:150px;">[[${product.productContent}]]</p>
                                         <div class="row">
                                             <div class="col">
-                                                <p class="btn btn-danger btn-block">[[${product.productPrice}]] VNĐ</p>
+                                                <p class="btn btn-danger btn-block">[[${product.productPriceFormat}]] VNĐ</p>
                                             </div>
                                             <div class="col">
-                                                <a th:href="@{'/cart/add'('p_id' = ${product.productId})}" class="btn btn-success btn-block">Add to cart</a>
+                                                <a th:href="@{'/cart/add'('p_id' = ${product.productId})}" class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
                                             </div>
                                         </div>
                                     </div>
@@ -180,10 +178,10 @@
                                         <p class="card-text" style="min-height:150px;">[[${product.productContent}]]</p>
                                         <div class="row">
                                             <div class="col">
-                                                <p class="btn btn-danger btn-block">[[${product.productPrice}]]</p>
+                                                <p class="btn btn-danger btn-block">[[${product.productPriceFormat}]] VNĐ</p>
                                             </div>
                                             <div class="col">
-                                                <a href="cart.html" class="btn btn-success btn-block">Add to cart</a>
+                                                <a th:href="@{'/cart/add'('p_id' = ${product.productId})}" class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
                                             </div>
                                         </div>
                                     </div>

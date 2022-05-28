@@ -17,6 +17,7 @@ public class ProductInCartDto implements Serializable {
     private String productImgLink;
     private String productName;
     private Long quantity;
-    private Double totalPrice;
+    private String totalPrice;
+    private Double totalPriceDouble = 0.0;
 
 }

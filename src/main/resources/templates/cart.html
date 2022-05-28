@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Site meta -->
     <meta charset="utf-8">
@@ -15,12 +15,14 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="/">CH's Store</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="col-2">
+            <a class="navbar-brand" href="/">CH's Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse justify-content-end col-6 mx-auto" id="navbarsExampleDefault" style="max-width: 400px;">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
@@ -28,32 +30,45 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/product/">Sản phẩm</a>
                 </li>
-                <li th:if="${!checkLogin}" class="nav-item">
-                    <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
-                </li>
             </ul>
+
+        </div>
+
+        <div class="col-4" style="display: inherit;">
             <form class="form-inline my-2 my-lg-0">
                 <a class="btn btn-success btn-sm ml-3" href="/cart/">
-                    <i class="fa fa-shopping-cart"></i> Cart
+                    <i class="fa fa-shopping-cart"></i> Giỏ hàng
                     <span class="badge badge-light">[[${numOfProductInCart}]]</span>
                 </a>
             </form>
             <ul class="navbar-nav m-auto">
+
                 <li th:if="${checkLogin}" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         Xin chào [[${customer.customerName}]]
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Đăng xuất</a>
+                        <a th:href="@{/logout/}" class="dropdown-item">Đăng xuất</a>
                     </div>
                 </li>
+
+                <li th:if="${!checkLogin}" class="nav-item">
+                    <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
+                </li>
+                <li class="nav-item" style ="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</li>
+                <li th:if="${!checkLogin}" class="nav-item">
+                    <a class="nav-link" th:href="@{/login/}">Đăng ký</a>
+                </li>
+
             </ul>
         </div>
     </div>
 </nav>
+
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">E-COMMERCE CART</h1>
+        <h1 class="jumbotron-heading">TRANG WEB THƯƠNG MẠI ĐIỆN TỬ</h1>
+        <p class="lead text-muted mb-0">Được xây dựng bởi Tất Tân Chu và Nguyễn Huy Hòa</p>
      </div>
 </section>
 
@@ -61,24 +76,25 @@
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped text-center">
                     <thead>
                         <tr>
-                            <th scope="col"> </th>
+                            <th scope="col">Hình ảnh</th>
                             <th scope="col">Tên sản phẩm</th>
                             <th scope="col" class="text-center">Số lượng</th>
-                            <th scope="col" class="text-right">Giá</th>
-                            <th> </th>
+                            <th scope="col" class="text-center">Giá</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <div th:each = "productInCart : ${productInCarts}">
                             <tr>
-                                <td><img th:src="@{${productInCart.productImgLink}}" /> </td>
+                                <td><img th:src="@{${productInCart.productImgLink}}" style="width: 50%;"/> </td>
                                 <td>[[${productInCart.productName}]]</td>
                                 <form method="GET" th:action="@{'/cart/update'}">
                                     <td><input name="number" class="form-control" type="text" th:value="${productInCart.quantity}" /></td>
-                                    <td><input type="hidden" name="p_id" th:value="${productInCart.productId}"></td>
+                                    <input type="hidden" name="p_id" th:value="${productInCart.productId}">
                                     <td class="text-right">[[${productInCart.totalPrice}]]</td>
                                     <td class="text-right"><button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-square-o"></i> </button> </td>
                                 </form>
@@ -90,10 +106,6 @@
                         </div>
 
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                             <td><strong>Total</strong></td>
                             <td class="text-right"><strong>[[${totalPriceInCart}]] VNĐ</strong></td>
                         </tr>
@@ -110,49 +122,46 @@
                 </form>
             </div>
         </div>
-        <a type="submit" class="btn btn-lg btn-success" href="./payment.html">THANH TOÁN nào</a>
     </div>
 </div>
 
 
 <!-- Footer -->
-<footer class="container" style="position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;">
-    <div>
-        <div class="row">
-            <div class="col-md-3 col-lg-4 col-xl-3">
-                <p class="mb-0">
-                    Cung cấp Laptop, PC, Linh phụ kiện chính hãng
-                </p>
-            </div>
+<footer  style ="background: #343a40;" >
+    <div class="row text-light p-4">
+        <div class="col-md-3 col-lg-4 col-xl-3">
+            <p class="mb-3">
+                Cung cấp Laptop, PC, Linh phụ kiện chính hãng
+            </p>
+        </div>
 
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
 
-                <ul class="list-unstyled">
-                    <li><a style =" color: f8f9fa" href="hispurchase.jsp">Lịch sử mua hàng</a></li>
-                    <li><a href="insurance.jsp">Chính sách bảo hành</a></li>
-                    <li><a href="returnpro.jsp">Chính sách đổi trả</a></li>
-                    <li><a href="delipay.jsp">Giao hàng và thanh toán</a></li>
-                </ul>
-            </div>
+            <ul class="list-unstyled">
+                <li><a class="text-light" href="">Lịch sử mua hàng</a></li>
+                <li><a class="text-light" href="">Chính sách bảo hành</a></li>
+                <li><a class="text-light" href="">Chính sách đổi trả</a></li>
+                <li><a class="text-light" href="">Giao hàng và thanh toán</a></li>
+            </ul>
+        </div>
 
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto" style="color: f8f9fa">
-                <ul class="list-unstyled">
-                    <li><a href="introduce.jsp">Giới thiệu công ty</a></li>
-                    <li><a href="recruitment.jsp">Tuyển dụng</a></li>
-                    <li><a href="feedback.jsp">Gửi góp ý, khiếu nại</a></li>
-                    <li><a href="store.jsp">Tìm cửa hàng gần nhất</a></li>
-                </ul>
-            </div>
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+            <ul class="list-unstyled">
+                <li><a class="text-light" href="">Giới thiệu công ty</a></li>
+                <li><a class="text-light" href="">Tuyển dụng</a></li>
+                <li><a class="text-light" href="">Gửi góp ý, khiếu nại</a></li>
+                <li><a class="text-light" href="">Tìm cửa hàng gần nhất</a></li>
+            </ul>
+        </div>
 
-            <div class="col-md-4 col-lg-3 col-xl-3">
-                <h5>Thông tin liên hệ </h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                <ul class="list-unstyled">
-                    <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
-                    <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
-                    <li><i class="fa fa-phone mr-2"></i> 19001523</li>
-                </ul>
-            </div>
+        <div class="col-md-4 col-lg-3 col-xl-3 bg-black">
+            <h5>Thông tin liên hệ </h5>
+            <hr class="mb-2 mt-0 d-inline-block mx-auto w-25">
+            <ul class="list-unstyled">
+                <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
+                <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
+                <li><i class="fa fa-phone mr-2"></i> 19001523</li>
+            </ul>
         </div>
     </div>
 </footer>

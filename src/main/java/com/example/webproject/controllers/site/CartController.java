@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +40,6 @@ public class CartController {
 
         Customer customer = (Customer)session.getAttribute("customer");
         if(customer != null){
-            Boolean checkLogin = true;
             model.addAttribute("checkLogin", true);
             model.addAttribute("customer", customer);
         }else {
@@ -61,7 +62,9 @@ public class CartController {
             dto.setProductId(product.getProductId());
             dto.setProductImgLink(product.getProductAvatar());
             dto.setProductName(product.getProductName());
-            dto.setTotalPrice(item.getQuantity() * product.getProductPrice());
+
+            DecimalFormat df = new DecimalFormat("#,###.00");
+            dto.setTotalPrice(df.format(BigDecimal.valueOf(item.getQuantity() * product.getProductPrice())));
             dto.setQuantity(item.getQuantity());
 
             productInCartDtoList.add(dto);
@@ -69,8 +72,11 @@ public class CartController {
             totalPriceInCart += item.getQuantity() * product.getProductPrice();
         }
 
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        String format = df.format(totalPriceInCart);
+
         model.addAttribute("productInCarts", productInCartDtoList);
-        model.addAttribute("totalPriceInCart", totalPriceInCart);
+        model.addAttribute("totalPriceInCart", format);
 
         return new ModelAndView("cart", model);
     }
@@ -161,7 +167,7 @@ public class CartController {
             System.out.println(customer.getCustomerName());
         }
 
-        return "index";
+        return "redirect:/";
     }
 
     @PostMapping("/delete")
@@ -190,7 +196,9 @@ public class CartController {
             dto.setProductId(product.getProductId());
             dto.setProductImgLink(product.getProductAvatar());
             dto.setProductName(product.getProductName());
-            dto.setTotalPrice(item.getQuantity() * product.getProductPrice());
+
+            DecimalFormat df = new DecimalFormat("#,###.00");
+            dto.setTotalPrice(df.format(BigDecimal.valueOf(item.getQuantity() * product.getProductPrice())));
             dto.setQuantity(item.getQuantity());
 
             productInCartDtoList.add(dto);
@@ -198,8 +206,11 @@ public class CartController {
             totalPriceInCart += item.getQuantity() * product.getProductPrice();
         }
 
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        String format = df.format(totalPriceInCart);
+
         model.addAttribute("productInCarts", productInCartDtoList);
-        model.addAttribute("totalPriceInCart", totalPriceInCart);
+        model.addAttribute("totalPriceInCart", format);
         model.addAttribute("checkLogin", true);
         model.addAttribute("customer", customer);
 
@@ -233,7 +244,9 @@ public class CartController {
             dto.setProductId(product.getProductId());
             dto.setProductImgLink(product.getProductAvatar());
             dto.setProductName(product.getProductName());
-            dto.setTotalPrice(item.getQuantity() * product.getProductPrice());
+
+            DecimalFormat df = new DecimalFormat("#,###.00");
+            dto.setTotalPrice(df.format(BigDecimal.valueOf(item.getQuantity() * product.getProductPrice())));
             dto.setQuantity(item.getQuantity());
 
             productInCartDtoList.add(dto);
@@ -241,8 +254,11 @@ public class CartController {
             totalPriceInCart += item.getQuantity() * product.getProductPrice();
         }
 
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        String format = df.format(totalPriceInCart);
+
         model.addAttribute("productInCarts", productInCartDtoList);
-        model.addAttribute("totalPriceInCart", totalPriceInCart);
+        model.addAttribute("totalPriceInCart", format);
         model.addAttribute("checkLogin", true);
         model.addAttribute("customer", customer);
 

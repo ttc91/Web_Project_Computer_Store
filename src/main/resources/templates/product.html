@@ -15,12 +15,14 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="index.html">CH's Store</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="col-2">
+            <a class="navbar-brand" href="index.html">CH's Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse justify-content-end col-8" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Trang chủ</a>
@@ -28,37 +30,37 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/product/">Sản phẩm</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Đăng nhập</a>
-                </li>
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary btn-number">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <a class="btn btn-success btn-sm ml-3" href="cart.html">
-                    <i class="fa fa-shopping-cart"></i> Cart
-                    <span class="badge badge-light">3</span>
+                <a class="btn btn-success btn-sm ml-3" href="/cart/">
+                    <i class="fa fa-shopping-cart"></i> Giỏ hàng
+                    <span class="badge badge-light">[[${numOfProductInCart}]]</span>
                 </a>
             </form>
-            <ul class="navbar-nav m-auto">
-                <li th:if="${checkLogin}" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Xin chào [[${customer.customerName}]]
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Đăng xuất</a>
-                    </div>
-                </li>
-            </ul>
-
         </div>
+
+        <ul class="navbar-nav m-auto">
+
+            <li th:if="${checkLogin}" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Xin chào [[${customer.customerName}]]
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a th:href="@{/logout/}" class="dropdown-item" href="#">Đăng xuất</a>
+                </div>
+            </li>
+
+            <li th:if="${!checkLogin}" class="nav-item">
+                <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
+            </li>
+            <li class="nav-item" style ="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</li>
+            <li th:if="${!checkLogin}" class="nav-item">
+                <a class="nav-link" th:href="@{/register/}">Đăng ký</a>
+            </li>
+
+        </ul>
+
     </div>
 </nav>
 <section class="jumbotron text-center">
@@ -101,13 +103,21 @@
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    <h4 class="price">[[${product.productName}]]</h4>
-                    <p class="price_discounted btn btn-danger btn-block">[[${product.productPrice}]]</p>
+                    <h4 class="price" style="font-size: 26px;">[[${product.productName}]]</h4>
+                    <p class="price_discounted btn btn-danger btn-block" style="height: 65px;font-size: 25px;padding: 10px;">
+                        [[${product.productPriceFormat}]] VNĐ</p>
                     <form method="get" action="cart.html">
-                        <a href="cart.html" class="btn btn-success btn-lg btn-block text-uppercase">
+                        <a th:href="@{'/cart/add'('p_id' = ${product.productId})}"  class="btn btn-success btn-lg btn-block text-uppercase">
                             <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
                         </a>
                     </form>
+                </div>
+                <div class="card-body" style="font-size: 20px;margin-left: 5px;">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
+                        <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
+                        <li><i class="fa fa-phone mr-2"></i> 19001523</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -127,78 +137,44 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="card border-light mb-3">
-        <div class="card-header bg-primary text-white text-uppercase">
-            <i class="fa fa-comment"></i> ĐÁNH GIÁ VỀ SẢN PHẨM
-            <div class="mt-4">
-                <form method="POST" action="product_Detail?pro_Id=${id_pro}">
-                    <div class="form-group" >
-                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Họ tên" name="name" value="">
-                    </div>
-                    <div class="form-group">
-
-                        <select class="custom-select" id="inputGroupSelect02" name="rate">
-                            <option selected>Đánh giá bao nhiêu sao</option>
-                            <option value="1">*</option><span class="fas fa-star" style="color: #F0E68C;"></span>
-                            <option value="2">**</option>
-                            <option value="3">***</option>
-                            <option value="4">****</option>
-                            <option value="5">*****</option>
-                        </select>
-                    </div>
-                    <!-- <div class="form-group">
-                       <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Mã sản phẩm" name="pro_Id">
-                    </div> -->
-                    <div class="form-group">
-                        <textarea type="text" class="form-control" id="exampleFormControlInput1" placeholder="Đánh giá" name="rate_des"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success">Đánh giá</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <!-- Footer -->
-<footer class="container">
-    <div>
-        <div class="row">
-            <div class="col-md-3 col-lg-4 col-xl-3">
-                <p class="mb-0">
-                    Cung cấp Laptop, PC, Linh phụ kiện chính hãng
-                </p>
-            </div>
+<footer  style ="background: #343a40;" >
+    <div class="row text-light p-4">
+        <div class="col-md-3 col-lg-4 col-xl-3">
+            <p class="mb-3">
+                Cung cấp Laptop, PC, Linh phụ kiện chính hãng
+            </p>
+        </div>
 
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
 
-                <ul class="list-unstyled">
-                    <li><a href="hispurchase.jsp">Lịch sử mua hàng</a></li>
-                    <li><a href="insurance.jsp">Chính sách bảo hành</a></li>
-                    <li><a href="returnpro.jsp">Chính sách đổi trả</a></li>
-                    <li><a href="delipay.jsp">Giao hàng và thanh toán</a></li>
-                </ul>
-            </div>
+            <ul class="list-unstyled">
+                <li><a class="text-light" href="">Lịch sử mua hàng</a></li>
+                <li><a class="text-light" href="">Chính sách bảo hành</a></li>
+                <li><a class="text-light" href="">Chính sách đổi trả</a></li>
+                <li><a class="text-light" href="">Giao hàng và thanh toán</a></li>
+            </ul>
+        </div>
 
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
-                <ul class="list-unstyled">
-                    <li><a href="introduce.jsp">Giới thiệu công ty</a></li>
-                    <li><a href="recruitment.jsp">Tuyển dụng</a></li>
-                    <li><a href="feedback.jsp">Gửi góp ý, khiếu nại</a></li>
-                    <li><a href="store.jsp">Tìm cửa hàng gần nhất</a></li>
-                </ul>
-            </div>
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+            <ul class="list-unstyled">
+                <li><a class="text-light" href="">Giới thiệu công ty</a></li>
+                <li><a class="text-light" href="">Tuyển dụng</a></li>
+                <li><a class="text-light" href="">Gửi góp ý, khiếu nại</a></li>
+                <li><a class="text-light" href="">Tìm cửa hàng gần nhất</a></li>
+            </ul>
+        </div>
 
-            <div class="col-md-4 col-lg-3 col-xl-3">
-                <h5>Thông tin liên hệ </h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                <ul class="list-unstyled">
-                    <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
-                    <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
-                    <li><i class="fa fa-phone mr-2"></i> 19001523</li>
-                </ul>
-            </div>
+        <div class="col-md-4 col-lg-3 col-xl-3 bg-black">
+            <h5>Thông tin liên hệ </h5>
+            <hr class="mb-2 mt-0 d-inline-block mx-auto w-25">
+            <ul class="list-unstyled">
+                <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
+                <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
+                <li><i class="fa fa-phone mr-2"></i> 19001523</li>
+            </ul>
         </div>
     </div>
 </footer>

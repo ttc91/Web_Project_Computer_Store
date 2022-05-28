@@ -43,7 +43,6 @@ public class LoginController {
 
         if(check){
             String username = authentication.getName();
-            System.out.println(username);
             Customer customer = customerService.findCustomerByCustomerPhoneNumber(username);
             request.getSession().setAttribute("customer", customer);
             model.addAttribute("customer", customer);

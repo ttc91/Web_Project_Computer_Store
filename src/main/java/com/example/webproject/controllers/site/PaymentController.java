@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -54,7 +55,9 @@ public class PaymentController {
             dto.setProductId(product.getProductId());
             dto.setProductImgLink(product.getProductAvatar());
             dto.setProductName(product.getProductName());
-            dto.setTotalPrice(item.getQuantity() * product.getProductPrice());
+            DecimalFormat df = new DecimalFormat("#,###.00");
+            dto.setTotalPrice(df.format(BigDecimal.valueOf(item.getQuantity() * product.getProductPrice())));
+            dto.setTotalPriceDouble(item.getQuantity() * product.getProductPrice());
             dto.setQuantity(item.getQuantity());
 
             productInCartDtoList.add(dto);
@@ -86,7 +89,8 @@ public class PaymentController {
             detail.setId(key);
             detail.setCustomer(customer);
             detail.setQuantity(item.getQuantity());
-            detail.setPrice(BigDecimal.valueOf(item.getTotalPrice()));
+
+            detail.setPrice(BigDecimal.valueOf(item.getTotalPriceDouble()));
             detail.setBill(bill);
 
             Optional<Product> opt = productService.findById(item.getProductId());
@@ -110,7 +114,7 @@ public class PaymentController {
         model.addAttribute("checkLogin", true);
         model.addAttribute("customer", customer);
 
-        return "index";
+        return "redirect:/";
     }
 
 }
