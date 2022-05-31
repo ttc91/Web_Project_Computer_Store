@@ -54,8 +54,8 @@
 
                 <li th:if="${!checkLogin}" class="nav-item">
                     <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
+                    <p class="nav-item" style ="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</p>
                 </li>
-                <li class="nav-item" style ="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</li>
                 <li th:if="${!checkLogin}" class="nav-item">
                     <a class="nav-link" th:href="@{/register/}">Đăng ký</a>
                 </li>
@@ -170,7 +170,7 @@
                 <div class="card-body">
                     <div class="row list-product ">
 
-                        <div th:each = "product : ${productsBest}" class="col-sm mb-5" style="width: calc(50%-40px);margin: 0 20px;">
+                        <div th:each = "product : ${productsBest}" class="col-sm mb-5" style="width: calc(25%-40px);margin: 0 20px;">
                                 <div class="card">
                                     <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
                                     <div class="card-body">
@@ -205,23 +205,22 @@
                     Cung cấp Laptop, PC, Linh phụ kiện chính hãng
                 </p>
             </div>
-
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
 
                 <ul class="list-unstyled">
-                    <li><a class="text-light" href="">Lịch sử mua hàng</a></li>
-                    <li><a class="text-light" href="">Chính sách bảo hành</a></li>
-                    <li><a class="text-light" href="">Chính sách đổi trả</a></li>
-                    <li><a class="text-light" href="">Giao hàng và thanh toán</a></li>
+<!--                    <li><a class="text-light" href="">Lịch sử mua hàng</a></li>-->
+<!--                    <li><a class="text-light" href="">Chính sách bảo hành</a></li>-->
+<!--                    <li><a class="text-light" href="">Chính sách đổi trả</a></li>-->
+<!--                    <li><a class="text-light" href="">Giao hàng và thanh toán</a></li>-->
                 </ul>
             </div>
 
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
                 <ul class="list-unstyled">
-                    <li><a class="text-light" href="">Giới thiệu công ty</a></li>
-                    <li><a class="text-light" href="">Tuyển dụng</a></li>
-                    <li><a class="text-light" href="">Gửi góp ý, khiếu nại</a></li>
-                    <li><a class="text-light" href="">Tìm cửa hàng gần nhất</a></li>
+<!--                    <li><a class="text-light" href="">Giới thiệu công ty</a></li>-->
+<!--                    <li><a class="text-light" href="">Tuyển dụng</a></li>-->
+<!--                    <li><a class="text-light" href="">Gửi góp ý, khiếu nại</a></li>-->
+<!--                    <li><a class="text-light" href="">Tìm cửa hàng gần nhất</a></li>-->
                 </ul>
             </div>
 
