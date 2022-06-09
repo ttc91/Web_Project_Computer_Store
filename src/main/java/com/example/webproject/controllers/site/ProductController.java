@@ -4,15 +4,15 @@ import com.example.webproject.data.models.db.dto.ProductDto;
 import com.example.webproject.data.models.db.entity.Category;
 import com.example.webproject.data.models.db.entity.Customer;
 import com.example.webproject.data.models.db.entity.Product;
+import com.example.webproject.data.remotes.services.CartProductService;
+import com.example.webproject.data.remotes.services.CartService;
 import com.example.webproject.data.remotes.services.CategoryService;
 import com.example.webproject.data.remotes.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -28,6 +28,12 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    CartService cartService;
+
+    @Autowired
+    CartProductService cartProductService;
 
     @Autowired
     CategoryService categoryService;
@@ -194,5 +200,108 @@ public class ProductController {
 
         return new ModelAndView("product", model);
     }
+
+    @RequestMapping("/management")
+    public ModelAndView navigateToProductManagement(ModelMap model, HttpSession session){
+
+        Customer customer = (Customer)session.getAttribute("customer");
+        if(customer != null){
+            model.addAttribute("checkLogin", true);
+            model.addAttribute("customer", customer);
+        }else {
+            model.addAttribute("checkLogin", false);
+        }
+
+        List<Product> productList = productService.findAll();
+        model.addAttribute("productList", productList);
+
+        return new ModelAndView("management", model);
+
+    }
+
+    @PostMapping("/management_update")
+    @ResponseBody
+    public ModelAndView navigateToUpdateProduct(ModelMap model,@RequestParam("p_img_link") String productAvatar,
+                                                @RequestParam("p_name") String productName, @RequestParam("p_content") String productContent,
+                                                @RequestParam("p_price") double productPrice, @RequestParam("p_id") Long productId){
+
+        Optional<Product> opt = productService.findById(productId);
+        if(opt != null){
+
+            if(productName.length() < 5){
+                model.addAttribute("check", true);
+                return new ModelAndView("redirect:/product/management/", model);
+            }
+
+            Product product = opt.get();
+            product.setProductAvatar(productAvatar);
+            product.setProductName(productName);
+            product.setProductContent(productContent);
+            product.setProductPrice(productPrice);
+            productService.save(product);
+        }
+        model.addAttribute("check", false);
+        return new ModelAndView("redirect:/product/management/", model);
+    }
+
+    @PostMapping("/management_delete")
+    @ResponseBody
+    public ModelAndView navigateToDeleteProduct(ModelMap model, @RequestParam("p_id") Long productId){
+
+        Optional<Product> opt = productService.findById(productId);
+        if(opt != null){
+            Product product = opt.get();
+            productService.delete(product);
+        }
+
+        model.addAttribute("check", false);
+        return new ModelAndView("redirect:/product/management/", model);
+    }
+
+    @RequestMapping("/management_insert_form")
+    public ModelAndView navigateToInsertProductForm(ModelMap model){
+        model.addAttribute("check", true);
+        model.addAttribute("check_content", true);
+        return new ModelAndView("insert_product", model);
+    }
+
+    @PostMapping("/management_insert")
+    @ResponseBody
+    public ModelAndView navigateToInsertProduct(ModelMap model, @RequestParam("p_img_link") String productAvatar,
+                                                @RequestParam("p_name") String productName, @RequestParam("p_content") String productContent,
+                                                @RequestParam("p_price") Double productPrice){
+
+
+        Category category = categoryService.getById(Long.valueOf(1));
+
+        if(productAvatar.length() > 0 && productName.length() > 0 && productContent.length() > 0 && productPrice != 0.0){
+            if(productName.length() > 5 && productContent.length() > 5){
+                Product product = new Product();
+                product.setProductAvatar(productAvatar);
+                product.setProductName(productName);
+                product.setCategory(category);
+                product.setNumOfSell(Long.valueOf(0));
+                product.setProductDiscount(0.0);
+                product.setProductNewPrice(productPrice);
+                product.setProductPrice(productPrice);
+                product.setProductContent(productContent);
+                productService.save(product);
+
+                model.addAttribute("check", false);
+                return new ModelAndView("redirect:/product/management/", model);
+            }
+
+            model.addAttribute("check", false);
+            model.addAttribute("check_content", true);
+            return new ModelAndView("insert_product", model);
+        }
+
+        model.addAttribute("check", true);
+        model.addAttribute("check_content", false);
+        return new ModelAndView("insert_product", model);
+
+
+    }
+
 
 }

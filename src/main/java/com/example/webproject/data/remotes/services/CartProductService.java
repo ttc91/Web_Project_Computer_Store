@@ -84,4 +84,6 @@ public interface CartProductService {
     Long countCartProductByCart(Cart cart);
 
     void deleteCartProductByProductAndAndCart(Product product, Cart cart);
+
+    void deleteByProduct(Product product);
 }

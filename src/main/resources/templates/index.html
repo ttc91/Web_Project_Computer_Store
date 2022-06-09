@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/product/">Sản phẩm</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/product/management/">Quản lý sản phẩm</a>
+                </li>
             </ul>
 
         </div>
@@ -137,7 +140,7 @@
                                 <div class="card">
                                     <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
                                     <div class="card-body">
-                                        <h4 class="card-title" style="min-height:120px;"><a href="product.html" title="View Product">[[${product.productName}]]</a></h4>
+                                        <h4 class="card-title" style="min-height:120px;"><a th:href="@{'/product'('p_id'=${product.productId})}" title="View Product">[[${product.productName}]]</a></h4>
                                         <p class="card-text" style="min-height:150px;">[[${product.productContent}]]</p>
                                         <div class="row">
                                             <div class="col">
@@ -174,7 +177,7 @@
                                 <div class="card">
                                     <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
                                     <div class="card-body">
-                                        <h4 class="card-title" style="min-height:120px;"><a href="product.html" title="View Product">[[${product.productName}]]</a></h4>
+                                        <h4 class="card-title" style="min-height:120px;"><a th:href="@{'/product'('p_id'=${product.productId})}" title="View Product">[[${product.productName}]]</a></h4>
                                         <p class="card-text" style="min-height:150px;">[[${product.productContent}]]</p>
                                         <div class="row">
                                             <div class="col">

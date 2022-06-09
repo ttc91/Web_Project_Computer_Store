@@ -195,4 +195,9 @@ public class CartProductServiceImpl implements CartProductService {
     public void deleteCartProductByProductAndAndCart(Product product, Cart cart) {
         repository.deleteCartProductByProductAndAndCart(product, cart);
     }
+
+    @Override
+    public void deleteByProduct(Product product) {
+        repository.deleteByProduct(product);
+    }
 }

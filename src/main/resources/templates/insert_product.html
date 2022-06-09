@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <!-- Site meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Laptop Ecommerce</title>
+    <!-- CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <div class="col-2">
+            <a class="navbar-brand" href="/">CH's Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse justify-content-end col-6 mx-auto" id="navbarsExampleDefault" style="max-width: 400px;">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/product/">Sản phẩm</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="col-4" style="display: inherit;">
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div th:if = "${!check}" class="alert alert-danger mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
+        Tên sản phẩm và nội dung vui lòng nhập trên 5 ký tự !
+    </div>
+
+    <div th:if = "${!check_content}" class="alert alert-danger mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
+        Vui lòng điền đầy đủ thông tin sản phẩm !
+    </div>
+
+    <form th:action="@{/product/management_insert}" class="login_design mt-5 border p-5 rounded mx-auto" method="POST" style="max-width: 500px;
+        height: 480px;">
+        <h2 class="text-center">Trang thêm sản phẩm</h2><br>
+        <div class="form-group">
+            <label for="p_name"><b>Tên sản phẩm:</b></label>
+            <input type="text" class="form-control " id="p_name" placeholder="Nhập tên sản phẩm" name="p_name">
+        </div>
+        <div class="form-group">
+            <label for="p_img_link"><b>Link hình ảnh sản phẩm:</b></label>
+            <input type="text" class="form-control " id="p_img_link" placeholder="Nhập link hình ảnh sản phẩm" name="p_img_link">
+        </div>
+        <div class="form-group">
+            <label for="p_content"><b>Nội dung sản phẩm:</b></label>
+            <input type="text" class="form-control " id="p_content" placeholder="Nhập nội dung sản phẩm" name="p_content">
+        </div>
+        <div class="form-group">
+            <label for="p_price"><b>Gía tiền:</b></label>
+            <input type="text" class="form-control " id="p_price" placeholder="Nhập giá tiền" name="p_price" value="0.0">
+        </div>
+        <button type="submit" class="p-2 btn btn-primary d-flex justify-content-center w-25 mx-auto">Thêm sản phẩm</button><br><br>
+    </form>
+
+</div>
+<footer  style ="background: #343a40; position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;" >
+    <div class="row text-light p-4">
+        <div class="col-md-3 col-lg-4 col-xl-3">
+            <p class="mb-3">
+                Cung cấp Laptop, PC, Linh phụ kiện chính hãng
+            </p>
+        </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+
+            <ul class="list-unstyled">
+                <li><a class="text-light" href="">Lịch sử mua hàng</a></li>
+                <li><a class="text-light" href="">Chính sách bảo hành</a></li>
+                <li><a class="text-light" href="">Chính sách đổi trả</a></li>
+                <li><a class="text-light" href="">Giao hàng và thanh toán</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+            <ul class="list-unstyled">
+                <li><a class="text-light" href="">Giới thiệu công ty</a></li>
+                <li><a class="text-light" href="">Tuyển dụng</a></li>
+                <li><a class="text-light" href="">Gửi góp ý, khiếu nại</a></li>
+                <li><a class="text-light" href="">Tìm cửa hàng gần nhất</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-xl-3 bg-black">
+            <h5>Thông tin liên hệ </h5>
+            <hr class="mb-2 mt-0 d-inline-block mx-auto w-25">
+            <ul class="list-unstyled">
+                <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
+                <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
+                <li><i class="fa fa-phone mr-2"></i> 19001523</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
