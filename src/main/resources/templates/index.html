@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/product/">Sản phẩm</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/product/">Quản lý sản phẩm</a>
+                </li>
             </ul>
 
         </div>
@@ -134,21 +137,21 @@
                         <!--Product card-->
 
                         <div th:each = "product : ${products}" class="col-sm list-product-item mb-5" style="width: calc(50%-40px);margin: 0 20px;">
-                                <div class="card">
-                                    <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
-                                    <div class="card-body">
-                                        <h4 class="card-title" style="min-height:120px;"><a href="product.html" title="View Product">[[${product.productName}]]</a></h4>
-                                        <p class="card-text" style="min-height:150px;">[[${product.productContent}]]</p>
-                                        <div class="row">
-                                            <div class="col">
-                                                <p class="btn btn-danger btn-block">[[${product.productPriceFormat}]] VNĐ</p>
-                                            </div>
-                                            <div class="col">
-                                                <a th:href="@{'/cart/add'('p_id' = ${product.productId})}" class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
-                                            </div>
+                            <div class="card">
+                                <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="min-height:120px;"><a th:href="@{'/product'('p_id'=${product.productId})}" title="View Product">[[${product.productName}]]</a></h4>
+                                    <p class="card-text" style="min-height:150px;">[[${product.productContent}]]</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="btn btn-danger btn-block">[[${product.productPriceFormat}]] VNĐ</p>
+                                        </div>
+                                        <div class="col">
+                                            <a th:href="@{'/cart/add'('p_id' = ${product.productId})}" class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
 
 
@@ -171,24 +174,24 @@
                     <div class="row list-product ">
 
                         <div th:each = "product : ${productsBest}" class="col-sm mb-5" style="width: calc(50%-40px);margin: 0 20px;">
-                                <div class="card">
-                                    <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
-                                    <div class="card-body">
-                                        <h4 class="card-title" style="min-height:120px;"><a href="product.html" title="View Product">[[${product.productName}]]</a></h4>
-                                        <p class="card-text" style="min-height:150px;">[[${product.productContent}]]</p>
-                                        <div class="row">
-                                            <div class="col">
-                                                <p class="btn btn-danger btn-block">[[${product.productPriceFormat}]] VNĐ</p>
-                                            </div>
-                                            <div class="col">
-                                                <a th:href="@{'/cart/add'('p_id' = ${product.productId})}" class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
-                                            </div>
+                            <div class="card">
+                                <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="min-height:120px;"><a th:href="@{'/product'('p_id'=${product.productId})}" title="View Product">[[${product.productName}]]</a></h4>
+                                    <p class="card-text" style="min-height:150px;">[[${product.productContent}]]</p>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="btn btn-danger btn-block">[[${product.productPriceFormat}]] VNĐ</p>
+                                        </div>
+                                        <div class="col">
+                                            <a th:href="@{'/cart/add'('p_id' = ${product.productId})}" class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
                         </div>
-                    
+
                     </div>
                 </div>
             </div>
@@ -199,42 +202,42 @@
 
 <!-- Footer -->
 <footer  style ="background: #343a40;" >
-        <div class="row text-light p-4">
-            <div class="col-md-3 col-lg-4 col-xl-3">
-                <p class="mb-3">
-                    Cung cấp Laptop, PC, Linh phụ kiện chính hãng
-                </p>
-            </div>
-
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
-
-                <ul class="list-unstyled">
-                    <li><a class="text-light" href="">Lịch sử mua hàng</a></li>
-                    <li><a class="text-light" href="">Chính sách bảo hành</a></li>
-                    <li><a class="text-light" href="">Chính sách đổi trả</a></li>
-                    <li><a class="text-light" href="">Giao hàng và thanh toán</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
-                <ul class="list-unstyled">
-                    <li><a class="text-light" href="">Giới thiệu công ty</a></li>
-                    <li><a class="text-light" href="">Tuyển dụng</a></li>
-                    <li><a class="text-light" href="">Gửi góp ý, khiếu nại</a></li>
-                    <li><a class="text-light" href="">Tìm cửa hàng gần nhất</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-4 col-lg-3 col-xl-3 bg-black">
-                <h5>Thông tin liên hệ </h5>
-                <hr class="mb-2 mt-0 d-inline-block mx-auto w-25">
-                <ul class="list-unstyled">
-                    <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
-                    <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
-                    <li><i class="fa fa-phone mr-2"></i> 19001523</li>
-                </ul>
-            </div>
+    <div class="row text-light p-4">
+        <div class="col-md-3 col-lg-4 col-xl-3">
+            <p class="mb-3">
+                Cung cấp Laptop, PC, Linh phụ kiện chính hãng
+            </p>
         </div>
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+
+            <ul class="list-unstyled">
+                <li><a class="text-light" href="">Lịch sử mua hàng</a></li>
+                <li><a class="text-light" href="">Chính sách bảo hành</a></li>
+                <li><a class="text-light" href="">Chính sách đổi trả</a></li>
+                <li><a class="text-light" href="">Giao hàng và thanh toán</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+            <ul class="list-unstyled">
+                <li><a class="text-light" href="">Giới thiệu công ty</a></li>
+                <li><a class="text-light" href="">Tuyển dụng</a></li>
+                <li><a class="text-light" href="">Gửi góp ý, khiếu nại</a></li>
+                <li><a class="text-light" href="">Tìm cửa hàng gần nhất</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-xl-3 bg-black">
+            <h5>Thông tin liên hệ </h5>
+            <hr class="mb-2 mt-0 d-inline-block mx-auto w-25">
+            <ul class="list-unstyled">
+                <li><i class="fa fa-home mr-2"></i> LaptopOnine</li>
+                <li><i class="fa fa-envelope mr-2"></i> cskh@laptoponline.com</li>
+                <li><i class="fa fa-phone mr-2"></i> 19001523</li>
+            </ul>
+        </div>
+    </div>
 </footer>
 
 <!-- JS -->

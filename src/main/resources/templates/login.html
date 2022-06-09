@@ -43,22 +43,22 @@
     <div th:if = "${!check}" class="alert alert-danger mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
         Đăng nhập không thành công !
     </div>
-        <form th:action="@{/j_spring_security_check}" class="login_design mt-5 border p-5 rounded mx-auto" method="POST" style="max-width: 500px;
+    <form th:action="@{/j_spring_security_check}" class="login_design mt-5 border p-5 rounded mx-auto" method="POST" style="max-width: 500px;
         height: 380px;">
-            <h2 class="text-center">Trang đăng nhập</h2><br>
-            <div class="form-group">
-                <label for="phone"><b>Số điện thoại:</b></label>
-                <input type="text" class="form-control " id="phone" placeholder="Nhập số điện thoại" name="phone">
-            </div>
-            <div class="form-group">
-                <label for="pwd"><b>Mật khẩu:</b></label>
-                <input type="password" class="form-control " id="pwd" placeholder="Nhập mật khẩu" name="pwd">
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="remember"> Remember me</label>
-            </div>
-            <button type="submit" class="p-2 btn btn-primary d-flex justify-content-center w-25 mx-auto">Login</button><br><br>
-        </form>
+        <h2 class="text-center">Trang đăng nhập</h2><br>
+        <div class="form-group">
+            <label for="phone"><b>Số điện thoại:</b></label>
+            <input type="text" class="form-control " id="phone" placeholder="Nhập số điện thoại" name="phone">
+        </div>
+        <div class="form-group">
+            <label for="pwd"><b>Mật khẩu:</b></label>
+            <input type="password" class="form-control " id="pwd" placeholder="Nhập mật khẩu" name="pwd">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+        </div>
+        <button type="submit" class="p-2 btn btn-primary d-flex justify-content-center w-25 mx-auto">Login</button><br><br>
+    </form>
 
 </div>
 <footer  style ="background: #343a40; position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;" >

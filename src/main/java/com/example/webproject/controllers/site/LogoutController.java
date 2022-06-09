@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -20,7 +21,9 @@ public class LogoutController {
     ProductService productService;
 
     @RequestMapping("/")
-    public ModelAndView logOut(ModelMap model){
+    public ModelAndView logOut(ModelMap model, HttpSession session){
+
+        session.removeAttribute("customer");
 
         model.addAttribute("checkLogin", false);
         model.addAttribute("numOfProductInCart", 0);
@@ -33,7 +36,7 @@ public class LogoutController {
         List<Product> productBestList = productService.getTop4BestProduct();
         model.addAttribute("productsBest", productBestList);
 
-        return new ModelAndView("index", model);
+        return new ModelAndView("forward:/", model);
     }
 
 }

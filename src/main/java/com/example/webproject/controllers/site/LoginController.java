@@ -58,7 +58,7 @@ public class LoginController {
 
             model.addAttribute("checkLogin", true);
 
-            return new ModelAndView("index", model);
+            return new ModelAndView("forward:/", model);
         }
 
         model.addAttribute("check", check);
