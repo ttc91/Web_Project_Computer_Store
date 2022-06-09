@@ -48,16 +48,16 @@
                         Xin chào [[${customer.customerName}]]
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a th:href="@{/logout/}" class="dropdown-item">Đăng xuất</a>
+                        <a th:href="@{/logout/}" class="dropdown-item" href="#">Đăng xuất</a>
                     </div>
                 </li>
 
                 <li th:if="${!checkLogin}" class="nav-item">
                     <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
+                    <p class="nav-item" style ="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</p>
                 </li>
-                <li class="nav-item" style ="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</li>
                 <li th:if="${!checkLogin}" class="nav-item">
-                    <a class="nav-link" th:href="@{/login/}">Đăng ký</a>
+                    <a class="nav-link" th:href="@{/register/}">Đăng ký</a>
                 </li>
 
             </ul>
@@ -105,9 +105,13 @@
                             </tr>
                         </div>
 
-                        <tr>
-                            <td><strong>Total</strong></td>
+                        <tr class="btn-danger mx-auto block" style="font-size: 30px; max-width: 500px">
+                            <td><strong>Tổng tiền</strong></td>
                             <td class="text-right"><strong>[[${totalPriceInCart}]] VNĐ</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,8 +119,8 @@
         </div>
         <div class="col mb-2">
             <div class="row">
-                <form method="POST" th:action="@{/payment/}">
-                    <div class="col-sm-12 col-md-6 text-right">
+                <form method="POST" th:action="@{/payment/}" class="mx-auto" style="max-width: 500px;">
+                    <div class="col-sm-12 col-md-6 text-right" >
                         <button type="submit" class="btn btn-lg btn-success">THANH TOÁN</button>
                     </div>
                 </form>
