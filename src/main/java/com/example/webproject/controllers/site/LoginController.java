@@ -29,7 +29,7 @@ public class LoginController {
     ProductService productService;
 
     @GetMapping("/")
-    public ModelAndView navigateToLoginForm(ModelMap model){
+    public ModelAndView navigateToLoginForm(ModelMap model) {
 
         model.addAttribute("check", true);
 
@@ -37,11 +37,11 @@ public class LoginController {
     }
 
     @RequestMapping("")
-    public ModelAndView navigateToLoginFormWhenFail(ModelMap model, @RequestParam("success") String value, Authentication authentication, HttpServletRequest request){
+    public ModelAndView navigateToLoginFormWhenFail(ModelMap model, @RequestParam("success") String value, Authentication authentication, HttpServletRequest request) {
 
         Boolean check = Boolean.valueOf(value);
 
-        if(check){
+        if (check) {
             String username = authentication.getName();
             Customer customer = customerService.findCustomerByCustomerPhoneNumber(username);
             request.getSession().setAttribute("customer", customer);
@@ -65,8 +65,6 @@ public class LoginController {
 
         return new ModelAndView("login", model);
     }
-
-
 
 
 }

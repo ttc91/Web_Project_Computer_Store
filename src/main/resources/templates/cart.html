@@ -17,12 +17,14 @@
     <div class="container">
         <div class="col-2">
             <a class="navbar-brand" href="/">CH's Store</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
 
-        <div class="collapse navbar-collapse justify-content-end col-6 mx-auto" id="navbarsExampleDefault" style="max-width: 400px;">
+        <div class="collapse navbar-collapse justify-content-end col-6 mx-auto" id="navbarsExampleDefault"
+             style="max-width: 400px;">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
@@ -47,7 +49,8 @@
             <ul class="navbar-nav m-auto">
 
                 <li th:if="${checkLogin}" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">
                         Xin chào [[${customer.customerName}]]
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -57,7 +60,7 @@
 
                 <li th:if="${!checkLogin}" class="nav-item">
                     <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
-                    <p class="nav-item" style ="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</p>
+                    <p class="nav-item" style="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</p>
                 </li>
                 <li th:if="${!checkLogin}" class="nav-item">
                     <a class="nav-link" th:href="@{/register/}">Đăng ký</a>
@@ -72,7 +75,7 @@
     <div class="container">
         <h1 class="jumbotron-heading">TRANG WEB THƯƠNG MẠI ĐIỆN TỬ</h1>
         <p class="lead text-muted mb-0">Được xây dựng bởi Tất Tân Chu và Nguyễn Huy Hòa</p>
-     </div>
+    </div>
 </section>
 
 <div class="container mb-4">
@@ -81,41 +84,48 @@
             <div class="table-responsive">
                 <table class="table table-striped text-center">
                     <thead>
-                        <tr>
-                            <th scope="col">Hình ảnh</th>
-                            <th scope="col">Tên sản phẩm</th>
-                            <th scope="col" class="text-center">Số lượng</th>
-                            <th scope="col" class="text-center">Giá</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col" class="text-center">Số lượng</th>
+                        <th scope="col" class="text-center">Giá</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <div th:each = "productInCart : ${productInCarts}">
-                            <tr>
-                                <td><img th:src="@{${productInCart.productImgLink}}" style="width: 50%;"/> </td>
-                                <td>[[${productInCart.productName}]]</td>
-                                <form method="GET" th:action="@{'/cart/update'}">
-                                    <td><input name="number" class="form-control" type="text" th:value="${productInCart.quantity}" /></td>
-                                    <input type="hidden" name="p_id" th:value="${productInCart.productId}">
-                                    <td class="text-right">[[${productInCart.totalPrice}]]</td>
-                                    <td class="text-right"><button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-square-o"></i> </button> </td>
-                                </form>
-                                <form method="POST" th:action= "@{'/cart/delete'('p_id' = ${productInCart.productId})}">
-                                    <td class="text-right"><button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                                </form>
+                    <div th:each="productInCart : ${productInCarts}">
+                        <tr>
+                            <td><img th:src="@{${productInCart.productImgLink}}" style="width: 50%;"/></td>
+                            <td>[[${productInCart.productName}]]</td>
+                            <form method="GET" th:action="@{'/cart/update'}">
+                                <td><input name="number" class="form-control" type="text"
+                                           th:value="${productInCart.quantity}"/></td>
+                                <input type="hidden" name="p_id" th:value="${productInCart.productId}">
+                                <td class="text-right">[[${productInCart.totalPrice}]]</td>
+                                <td class="text-right">
+                                    <button type="submit" class="btn btn-sm btn-primary"><i
+                                            class="fa fa-pencil-square-o"></i></button>
+                                </td>
+                            </form>
+                            <form method="POST" th:action="@{'/cart/delete'('p_id' = ${productInCart.productId})}">
+                                <td class="text-right">
+                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </form>
 
-                            </tr>
-                        </div>
-
-                        <tr class="btn-danger mx-auto block" style="font-size: 30px; max-width: 500px">
-                            <td><strong>Tổng tiền</strong></td>
-                            <td class="text-right"><strong>[[${totalPriceInCart}]] VNĐ</strong></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
+                    </div>
+
+                    <tr class="btn-danger mx-auto block" style="font-size: 30px; max-width: 500px">
+                        <td><strong>Tổng tiền</strong></td>
+                        <td class="text-right"><strong>[[${totalPriceInCart}]] VNĐ</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -123,7 +133,7 @@
         <div class="col mb-2">
             <div class="row">
                 <form method="POST" th:action="@{/payment/}" class="mx-auto" style="max-width: 500px;">
-                    <div class="col-sm-12 col-md-6 text-right" >
+                    <div class="col-sm-12 col-md-6 text-right">
                         <button type="submit" class="btn btn-lg btn-success">THANH TOÁN</button>
                     </div>
                 </form>
@@ -134,7 +144,7 @@
 
 
 <!-- Footer -->
-<footer  style ="background: #343a40;" >
+<footer style="background: #343a40;">
     <div class="row text-light p-4">
         <div class="col-md-3 col-lg-4 col-xl-3">
             <p class="mb-3">

@@ -24,7 +24,7 @@ public class RegisterController {
     private PasswordEncoder encoder;
 
     @RequestMapping("/")
-    public String navigateToRegisterPage(){
+    public String navigateToRegisterPage() {
         return "register";
     }
 
@@ -32,10 +32,10 @@ public class RegisterController {
     @ResponseBody
     public ModelAndView signupCustomer(ModelMap model, @RequestParam("phone") String phone,
                                        @RequestParam("username") String username, @RequestParam("pwd_1") String pwd_1,
-                                       @RequestParam("pwd_2") String pwd_2, @RequestParam("address") String address){
+                                       @RequestParam("pwd_2") String pwd_2, @RequestParam("address") String address) {
 
 
-        if(pwd_1.equals(pwd_2)){
+        if (pwd_1.equals(pwd_2)) {
             Customer customer = new Customer();
             customer.setCustomerAddress(address);
             customer.setCustomerName(username);

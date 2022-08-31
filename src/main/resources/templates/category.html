@@ -17,12 +17,14 @@
     <div class="container">
         <div class="col-2">
             <a class="navbar-brand" href="/">CH's Store</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
 
-        <div class="collapse navbar-collapse justify-content-end col-4 mx-auto" id="navbarsExampleDefault" style="max-width: 400px;">
+        <div class="collapse navbar-collapse justify-content-end col-4 mx-auto" id="navbarsExampleDefault"
+             style="max-width: 400px;">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
@@ -38,9 +40,10 @@
         </div>
 
         <div class="col-6" style="display: inherit;">
-            <form th:action = "@{/product/search}" class="form-inline my-2 my-lg-0">
+            <form th:action="@{/product/search}" class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
-                    <input type="text" name="char" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Tìm kiếm tên sản phẩm...">
+                    <input type="text" name="char" class="form-control" aria-label="Small"
+                           aria-describedby="inputGroup-sizing-sm" placeholder="Tìm kiếm tên sản phẩm...">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary btn-number">
                             <i class="fa fa-search"></i>
@@ -56,7 +59,8 @@
             </form>
             <ul class="navbar-nav m-auto">
                 <li th:if="${checkLogin}" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">
                         Xin chào [[${customer.customerName}]]
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -65,7 +69,7 @@
                 </li>
                 <li th:if="${!checkLogin}" class="nav-item">
                     <a class="nav-link" th:href="@{/login/}">Đăng nhập</a>
-                    <p class="nav-item" style ="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</p>
+                    <p class="nav-item" style="color: #ffffff; font-size: 20px; opacity: 50%; margin-top: 1px;">|</p>
                 </li>
                 <li th:if="${!checkLogin}" class="nav-item">
                     <a class="nav-link" th:href="@{/login/}">Đăng ký</a>
@@ -98,11 +102,13 @@
     <div class="row">
         <div class="col-3 col-sm-3">
             <div class="card bg-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Loại sản phẩm</div>
+                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Loại sản phẩm
+                </div>
                 <ul class="list-group category_block">
 
-                    <div th:each = "category : ${categories}">
-                        <li class="list-group-item"><a th:href="@{'/product/category'('c_id'=${category.id})}">[[${category.categoryName}]]</a></li>
+                    <div th:each="category : ${categories}">
+                        <li class="list-group-item"><a th:href="@{'/product/category'('c_id'=${category.id})}">[[${category.categoryName}]]</a>
+                        </li>
                     </div>
 
                 </ul>
@@ -110,18 +116,21 @@
         </div>
         <div class="col-9">
             <div class="row d-flex justify-content-around">
-                <div th:each = "product : ${products}" class="col-12 col-md-6 col-lg-4 mb-3">
+                <div th:each="product : ${products}" class="col-12 col-md-6 col-lg-4 mb-3">
                     <div class="card">
                         <img class="card-img-top" th:src="@{${product.productAvatar}}" th:alt="${product.productName}">
                         <div class="card-body">
-                            <h4 class="card-title" style="height:150px;"><a th:href="@{'/product'('p_id'=${product.productId})}" title="View Product">[[${product.productName}]]</a></h4>
+                            <h4 class="card-title" style="height:150px;"><a
+                                    th:href="@{'/product'('p_id'=${product.productId})}" title="View Product">[[${product.productName}]]</a>
+                            </h4>
                             <p class="card-text" style="height:200px;">[[${product.productContent}]]</p>
                             <div class="row">
                                 <div class="col">
                                     <p class="btn btn-danger btn-block">[[${product.productPriceFormat}]] VNĐ</p>
                                 </div>
                                 <div class="col">
-                                    <a th:href="@{'/cart/add'('p_id' = ${product.productId})}" class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
+                                    <a th:href="@{'/cart/add'('p_id' = ${product.productId})}"
+                                       class="btn btn-success btn-block">Thêm vào giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -131,11 +140,11 @@
         </div>
     </div>
 </div>
-    </div>
+</div>
 </div>
 
 <!-- Footer -->
-<footer  style ="background: #343a40;" >
+<footer style="background: #343a40;">
     <div class="row text-light p-4">
         <div class="col-md-3 col-lg-4 col-xl-3">
             <p class="mb-3">

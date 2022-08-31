@@ -21,7 +21,7 @@ public class LogoutController {
     ProductService productService;
 
     @RequestMapping("/")
-    public ModelAndView logOut(ModelMap model, HttpSession session){
+    public ModelAndView logOut(ModelMap model, HttpSession session) {
 
         session.removeAttribute("customer");
 

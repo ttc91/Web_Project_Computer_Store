@@ -21,7 +21,7 @@ public class ACategoryController {
     CategoryService service;
 
     @PostMapping("/add_category")
-    private ResponseEntity<Category> addCategory (@Valid @RequestBody Category category){
+    private ResponseEntity<Category> addCategory(@Valid @RequestBody Category category) {
         service.save(category);
         return new ResponseEntity<>(category, HttpStatus.OK);
     }

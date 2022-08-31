@@ -39,14 +39,14 @@ public class ProductController {
     CategoryService categoryService;
 
     @GetMapping("/")
-    public String navigateProductPage(Model model, HttpSession session){
+    public String navigateProductPage(Model model, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
-        if(customer != null){
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer != null) {
             Boolean checkLogin = true;
             model.addAttribute("checkLogin", true);
             model.addAttribute("customer", customer);
-        }else {
+        } else {
             model.addAttribute("checkLogin", false);
         }
 
@@ -56,7 +56,7 @@ public class ProductController {
         List<Product> productList = productService.findAll();
 
         List<ProductDto> productDtoList = new ArrayList<>();
-        for(Product product : productList){
+        for (Product product : productList) {
             ProductDto dto = new ProductDto();
             dto.setProductId(product.getProductId());
             dto.setProductName(product.getProductName());
@@ -81,14 +81,14 @@ public class ProductController {
     }
 
     @GetMapping("/category")
-    public ModelAndView navigateProductPageByCategory(ModelMap model, @RequestParam("c_id") Integer id, HttpSession session){
+    public ModelAndView navigateProductPageByCategory(ModelMap model, @RequestParam("c_id") Integer id, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
-        if(customer != null){
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer != null) {
             Boolean checkLogin = true;
             model.addAttribute("checkLogin", true);
             model.addAttribute("customer", customer);
-        }else {
+        } else {
             model.addAttribute("checkLogin", false);
         }
 
@@ -99,7 +99,7 @@ public class ProductController {
 
         List<Product> productList = productService.getProductByCategoryId(c_id);
         List<ProductDto> productDtoList = new ArrayList<>();
-        for(Product product : productList){
+        for (Product product : productList) {
             ProductDto dto = new ProductDto();
             dto.setProductId(product.getProductId());
             dto.setProductName(product.getProductName());
@@ -124,14 +124,14 @@ public class ProductController {
     }
 
     @RequestMapping("/search")
-    public ModelAndView navigateProductPageBySearchString(ModelMap model, @RequestParam(value = "char", required = false) String productChar, HttpSession session){
+    public ModelAndView navigateProductPageBySearchString(ModelMap model, @RequestParam(value = "char", required = false) String productChar, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
-        if(customer != null){
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer != null) {
             Boolean checkLogin = true;
             model.addAttribute("checkLogin", true);
             model.addAttribute("customer", customer);
-        }else {
+        } else {
             model.addAttribute("checkLogin", false);
         }
 
@@ -140,7 +140,7 @@ public class ProductController {
 
         List<Product> productList = productService.getProductByProductChar(productChar);
         List<ProductDto> productDtoList = new ArrayList<>();
-        for(Product product : productList){
+        for (Product product : productList) {
             ProductDto dto = new ProductDto();
             dto.setProductId(product.getProductId());
             dto.setProductName(product.getProductName());
@@ -164,19 +164,19 @@ public class ProductController {
     }
 
     @RequestMapping("")
-    public ModelAndView navigateProductDetail(ModelMap model,@RequestParam("p_id") Long id, HttpSession session){
+    public ModelAndView navigateProductDetail(ModelMap model, @RequestParam("p_id") Long id, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
-        if(customer != null){
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer != null) {
             Boolean checkLogin = true;
             model.addAttribute("checkLogin", true);
             model.addAttribute("customer", customer);
-        }else {
+        } else {
             model.addAttribute("checkLogin", false);
         }
 
         Optional<Product> opt = productService.findById(id);
-        if(opt.isPresent()){
+        if (opt.isPresent()) {
             Product product = opt.get();
 
             ProductDto productDto = new ProductDto();
@@ -202,13 +202,13 @@ public class ProductController {
     }
 
     @RequestMapping("/management")
-    public ModelAndView navigateToProductManagement(ModelMap model, HttpSession session){
+    public ModelAndView navigateToProductManagement(ModelMap model, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
-        if(customer != null){
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer != null) {
             model.addAttribute("checkLogin", true);
             model.addAttribute("customer", customer);
-        }else {
+        } else {
             model.addAttribute("checkLogin", false);
         }
 
@@ -221,14 +221,14 @@ public class ProductController {
 
     @PostMapping("/management_update")
     @ResponseBody
-    public ModelAndView navigateToUpdateProduct(ModelMap model,@RequestParam("p_img_link") String productAvatar,
+    public ModelAndView navigateToUpdateProduct(ModelMap model, @RequestParam("p_img_link") String productAvatar,
                                                 @RequestParam("p_name") String productName, @RequestParam("p_content") String productContent,
-                                                @RequestParam("p_price") double productPrice, @RequestParam("p_id") Long productId){
+                                                @RequestParam("p_price") double productPrice, @RequestParam("p_id") Long productId) {
 
         Optional<Product> opt = productService.findById(productId);
-        if(opt != null){
+        if (opt != null) {
 
-            if(productName.length() < 5){
+            if (productName.length() < 5) {
                 model.addAttribute("check", true);
                 return new ModelAndView("redirect:/product/management/", model);
             }
@@ -246,10 +246,10 @@ public class ProductController {
 
     @PostMapping("/management_delete")
     @ResponseBody
-    public ModelAndView navigateToDeleteProduct(ModelMap model, @RequestParam("p_id") Long productId){
+    public ModelAndView navigateToDeleteProduct(ModelMap model, @RequestParam("p_id") Long productId) {
 
         Optional<Product> opt = productService.findById(productId);
-        if(opt != null){
+        if (opt != null) {
             Product product = opt.get();
             productService.delete(product);
         }
@@ -259,7 +259,7 @@ public class ProductController {
     }
 
     @RequestMapping("/management_insert_form")
-    public ModelAndView navigateToInsertProductForm(ModelMap model){
+    public ModelAndView navigateToInsertProductForm(ModelMap model) {
         model.addAttribute("check", true);
         model.addAttribute("check_content", true);
         return new ModelAndView("insert_product", model);
@@ -269,13 +269,13 @@ public class ProductController {
     @ResponseBody
     public ModelAndView navigateToInsertProduct(ModelMap model, @RequestParam("p_img_link") String productAvatar,
                                                 @RequestParam("p_name") String productName, @RequestParam("p_content") String productContent,
-                                                @RequestParam("p_price") Double productPrice){
+                                                @RequestParam("p_price") Double productPrice) {
 
 
         Category category = categoryService.getById(Long.valueOf(1));
 
-        if(productAvatar.length() > 0 && productName.length() > 0 && productContent.length() > 0 && productPrice != 0.0){
-            if(productName.length() > 5 && productContent.length() > 5){
+        if (productAvatar.length() > 0 && productName.length() > 0 && productContent.length() > 0 && productPrice != 0.0) {
+            if (productName.length() > 5 && productContent.length() > 5) {
                 Product product = new Product();
                 product.setProductAvatar(productAvatar);
                 product.setProductName(productName);

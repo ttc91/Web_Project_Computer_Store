@@ -9,19 +9,22 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
         <div class="col-2">
             <a class="navbar-brand" href="/">CH's Store</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
 
-        <div class="collapse navbar-collapse justify-content-end col-6 mx-auto" id="navbarsExampleDefault" style="max-width: 400px;">
+        <div class="collapse navbar-collapse justify-content-end col-6 mx-auto" id="navbarsExampleDefault"
+             style="max-width: 400px;">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
@@ -40,15 +43,17 @@
 
 <div class="container">
 
-    <div th:if = "${!check}" class="alert alert-danger mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
+    <div th:if="${!check}" class="alert alert-danger mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
         Tên sản phẩm và nội dung vui lòng nhập trên 5 ký tự !
     </div>
 
-    <div th:if = "${!check_content}" class="alert alert-danger mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
+    <div th:if="${!check_content}" class="alert alert-danger mt-5 text-center mx-auto" role="alert"
+         style="max-width: 500px;">
         Vui lòng điền đầy đủ thông tin sản phẩm !
     </div>
 
-    <form th:action="@{/product/management_insert}" class="login_design mt-5 border p-5 rounded mx-auto" method="POST" style="max-width: 500px;
+    <form th:action="@{/product/management_insert}" class="login_design mt-5 border p-5 rounded mx-auto" method="POST"
+          style="max-width: 500px;
         height: 480px;">
         <h2 class="text-center">Trang thêm sản phẩm</h2><br>
         <div class="form-group">
@@ -57,21 +62,26 @@
         </div>
         <div class="form-group">
             <label for="p_img_link"><b>Link hình ảnh sản phẩm:</b></label>
-            <input type="text" class="form-control " id="p_img_link" placeholder="Nhập link hình ảnh sản phẩm" name="p_img_link">
+            <input type="text" class="form-control " id="p_img_link" placeholder="Nhập link hình ảnh sản phẩm"
+                   name="p_img_link">
         </div>
         <div class="form-group">
             <label for="p_content"><b>Nội dung sản phẩm:</b></label>
-            <input type="text" class="form-control " id="p_content" placeholder="Nhập nội dung sản phẩm" name="p_content">
+            <input type="text" class="form-control " id="p_content" placeholder="Nhập nội dung sản phẩm"
+                   name="p_content">
         </div>
         <div class="form-group">
             <label for="p_price"><b>Gía tiền:</b></label>
-            <input type="text" class="form-control " id="p_price" placeholder="Nhập giá tiền" name="p_price" value="0.0">
+            <input type="text" class="form-control " id="p_price" placeholder="Nhập giá tiền" name="p_price"
+                   value="0.0">
         </div>
-        <button type="submit" class="p-2 btn btn-primary d-flex justify-content-center w-25 mx-auto">Thêm sản phẩm</button><br><br>
+        <button type="submit" class="p-2 btn btn-primary d-flex justify-content-center w-25 mx-auto">Thêm sản phẩm
+        </button>
+        <br><br>
     </form>
 
 </div>
-<footer  style ="background: #343a40; position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;" >
+<footer style="background: #343a40; position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;">
     <div class="row text-light p-4">
         <div class="col-md-3 col-lg-4 col-xl-3">
             <p class="mb-3">

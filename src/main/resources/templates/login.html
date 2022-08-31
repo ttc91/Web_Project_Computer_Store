@@ -9,19 +9,22 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
         <div class="col-2">
             <a class="navbar-brand" href="/">CH's Store</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
 
-        <div class="collapse navbar-collapse justify-content-end col-6 mx-auto" id="navbarsExampleDefault" style="max-width: 400px;">
+        <div class="collapse navbar-collapse justify-content-end col-6 mx-auto" id="navbarsExampleDefault"
+             style="max-width: 400px;">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
@@ -40,10 +43,11 @@
 
 <div class="container">
 
-    <div th:if = "${!check}" class="alert alert-danger mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
+    <div th:if="${!check}" class="alert alert-danger mt-5 text-center mx-auto" role="alert" style="max-width: 500px;">
         Đăng nhập không thành công !
     </div>
-    <form th:action="@{/j_spring_security_check}" class="login_design mt-5 border p-5 rounded mx-auto" method="POST" style="max-width: 500px;
+    <form th:action="@{/j_spring_security_check}" class="login_design mt-5 border p-5 rounded mx-auto" method="POST"
+          style="max-width: 500px;
         height: 380px;">
         <h2 class="text-center">Trang đăng nhập</h2><br>
         <div class="form-group">
@@ -57,11 +61,12 @@
         <div class="checkbox">
             <label><input type="checkbox" name="remember"> Remember me</label>
         </div>
-        <button type="submit" class="p-2 btn btn-primary d-flex justify-content-center w-25 mx-auto">Login</button><br><br>
+        <button type="submit" class="p-2 btn btn-primary d-flex justify-content-center w-25 mx-auto">Login</button>
+        <br><br>
     </form>
 
 </div>
-<footer  style ="background: #343a40; position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;" >
+<footer style="background: #343a40; position: fixed; bottom: 0;left: 0;right: 0;z-index: 1;">
     <div class="row text-light p-4">
         <div class="col-md-3 col-lg-4 col-xl-3">
             <p class="mb-3">

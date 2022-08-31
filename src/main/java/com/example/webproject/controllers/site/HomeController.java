@@ -38,8 +38,8 @@ public class HomeController {
     @RequestMapping("/")
     public String index(Model model, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
-        if(customer != null){
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer != null) {
             model.addAttribute("checkLogin", true);
             model.addAttribute("customer", customer);
 
@@ -47,7 +47,7 @@ public class HomeController {
             Long numOfProductInCart = cartProductService.countCartProductByCart(cart);
             model.addAttribute("numOfProductInCart", numOfProductInCart);
 
-        }else {
+        } else {
             model.addAttribute("checkLogin", false);
             model.addAttribute("numOfProductInCart", 0);
         }
@@ -55,7 +55,7 @@ public class HomeController {
         List<Product> productList = productService.getTop4NewProduct();
 
         List<ProductDto> productDtoList = new ArrayList<>();
-        for(Product product : productList){
+        for (Product product : productList) {
             ProductDto dto = new ProductDto();
             dto.setProductId(product.getProductId());
             dto.setProductName(product.getProductName());
@@ -89,7 +89,7 @@ public class HomeController {
         List<Product> productBestList = productService.getTop4BestProduct();
 
         List<ProductDto> productDtoListBest = new ArrayList<>();
-        for(Product product : productBestList){
+        for (Product product : productBestList) {
             ProductDto dto = new ProductDto();
             dto.setProductId(product.getProductId());
             dto.setProductName(product.getProductName());
@@ -107,9 +107,6 @@ public class HomeController {
 
         return "index";
     }
-
-
-
 
 
 }

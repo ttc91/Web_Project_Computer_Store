@@ -20,11 +20,10 @@ public class AProductController {
     ProductService service;
 
     @PostMapping("/add_product")
-    public ResponseEntity<Product> insertProduct(@Valid @RequestBody Product product){
+    public ResponseEntity<Product> insertProduct(@Valid @RequestBody Product product) {
         service.save(product);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
-
 
 
 }

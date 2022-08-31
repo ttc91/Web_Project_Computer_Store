@@ -36,17 +36,17 @@ public class PaymentController {
     @Autowired
     ProductService productService;
 
-    @PostMapping ("/")
-    public String actionPayment(Model model, HttpSession session){
+    @PostMapping("/")
+    public String actionPayment(Model model, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
+        Customer customer = (Customer) session.getAttribute("customer");
         Cart cart = cartService.findCartByCustomer(customer);
         List<CartProduct> cartProductList = cartProductService.findCartProductByCart(cart);
         List<ProductInCartDto> productInCartDtoList = new ArrayList<>();
 
         Double totalPriceInCart = 0.0;
 
-        for(CartProduct item : cartProductList){
+        for (CartProduct item : cartProductList) {
 
             Optional<Product> opt = productService.findById(item.getProduct().getProductId());
             Product product = opt.get();
@@ -79,7 +79,7 @@ public class PaymentController {
 
         bill = billService.findNewBillIdByCustomerId(customer.getCustomerId());
         BillDetailKey key = new BillDetailKey();
-        for(ProductInCartDto item : productInCartDtoList){
+        for (ProductInCartDto item : productInCartDtoList) {
 
             BillDetail detail = new BillDetail();
 

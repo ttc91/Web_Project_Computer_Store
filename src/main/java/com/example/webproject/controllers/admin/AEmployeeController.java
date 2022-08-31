@@ -20,7 +20,7 @@ public class AEmployeeController {
     private EmployeeService service;
 
     @PostMapping("add")
-    public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee employee){
+    public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee employee) {
         service.save(employee);
         return new ResponseEntity<Employee>(employee, HttpStatus.OK);
     }

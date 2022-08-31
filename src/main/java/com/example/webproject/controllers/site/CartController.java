@@ -36,13 +36,13 @@ public class CartController {
     ProductService productService;
 
     @RequestMapping("/")
-    public ModelAndView navigateCartPage(ModelMap model, HttpSession session){
+    public ModelAndView navigateCartPage(ModelMap model, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
-        if(customer != null){
+        Customer customer = (Customer) session.getAttribute("customer");
+        if (customer != null) {
             model.addAttribute("checkLogin", true);
             model.addAttribute("customer", customer);
-        }else {
+        } else {
             model.addAttribute("checkLogin", false);
         }
 
@@ -53,7 +53,7 @@ public class CartController {
 
         Double totalPriceInCart = 0.0;
 
-        for(CartProduct item : cartProducts){
+        for (CartProduct item : cartProducts) {
 
             Optional<Product> opt = productService.findById(item.getProduct().getProductId());
             Product product = opt.get();
@@ -81,28 +81,28 @@ public class CartController {
         return new ModelAndView("cart", model);
     }
 
-    @RequestMapping ("/add")
-    public String actionAddToCart(Model model, @RequestParam("p_id") Long productId, HttpSession session){
+    @RequestMapping("/add")
+    public String actionAddToCart(Model model, @RequestParam("p_id") Long productId, HttpSession session) {
 
         Customer customer = (Customer) session.getAttribute("customer");
         Cart cart = cartService.findCartByCustomer(customer);
 
 
-        if(cart != null){
+        if (cart != null) {
 
             Product product = new Product();
             Optional<Product> opt = productService.findById(productId);
 
-            if(opt.isPresent()){
+            if (opt.isPresent()) {
                 product = opt.get();
             }
 
             CartProduct cartProduct = cartProductService.findCartProductByCartAndProduct(cart, product);
-            if(cartProduct != null){
+            if (cartProduct != null) {
                 Long quantity = cartProduct.getQuantity();
                 cartProduct.setQuantity(quantity + 1);
                 cartProductService.save(cartProduct);
-            }else {
+            } else {
                 cartProduct = new CartProduct();
 
                 CartProductKey cartProductKey = new CartProductKey();
@@ -116,7 +116,7 @@ public class CartController {
                 cartProductService.save(cartProduct);
             }
 
-        }else {
+        } else {
             cart = new Cart();
             cartService.save(cart);
 
@@ -126,7 +126,7 @@ public class CartController {
             Product product = new Product();
             Optional<Product> opt = productService.findById(productId);
 
-            if(opt.isPresent()){
+            if (opt.isPresent()) {
                 product = opt.get();
             }
 
@@ -140,8 +140,8 @@ public class CartController {
             cartProductService.save(cartProduct);
         }
 
-        customer = (Customer)session.getAttribute("customer");
-        if(customer != null){
+        customer = (Customer) session.getAttribute("customer");
+        if (customer != null) {
             model.addAttribute("checkLogin", true);
             model.addAttribute("customer", customer);
 
@@ -149,7 +149,7 @@ public class CartController {
             Long numOfProductInCart = cartProductService.countCartProductByCart(cart);
             model.addAttribute("numOfProductInCart", numOfProductInCart);
 
-        }else {
+        } else {
             model.addAttribute("checkLogin", false);
             model.addAttribute("numOfProductInCart", 0);
         }
@@ -163,7 +163,7 @@ public class CartController {
         List<Product> productBestList = productService.getTop4BestProduct();
         model.addAttribute("productsBest", productBestList);
 
-        if(customer!=null){
+        if (customer != null) {
             System.out.println(customer.getCustomerName());
         }
 
@@ -171,9 +171,9 @@ public class CartController {
     }
 
     @PostMapping("/delete")
-    public ModelAndView actionDeleteInCart(ModelMap model, @RequestParam("p_id") Long productId, HttpSession session){
+    public ModelAndView actionDeleteInCart(ModelMap model, @RequestParam("p_id") Long productId, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
+        Customer customer = (Customer) session.getAttribute("customer");
         Cart cart = cartService.findCartByCustomer(customer);
 
         Optional<Product> opt = productService.findById(productId);
@@ -187,7 +187,7 @@ public class CartController {
 
         Double totalPriceInCart = 0.0;
 
-        for(CartProduct item : cartProducts){
+        for (CartProduct item : cartProducts) {
 
             opt = productService.findById(item.getProduct().getProductId());
             product = opt.get();
@@ -218,9 +218,9 @@ public class CartController {
     }
 
     @GetMapping("/update")
-    public ModelAndView actionUpdateProductInCart(ModelMap model, @RequestParam("number") Long number, @RequestParam("p_id") Long productId, HttpSession session){
+    public ModelAndView actionUpdateProductInCart(ModelMap model, @RequestParam("number") Long number, @RequestParam("p_id") Long productId, HttpSession session) {
 
-        Customer customer = (Customer)session.getAttribute("customer");
+        Customer customer = (Customer) session.getAttribute("customer");
         Cart cart = cartService.findCartByCustomer(customer);
 
         Optional<Product> opt = productService.findById(productId);
@@ -235,7 +235,7 @@ public class CartController {
 
         Double totalPriceInCart = 0.0;
 
-        for(CartProduct item : cartProducts){
+        for (CartProduct item : cartProducts) {
 
             opt = productService.findById(item.getProduct().getProductId());
             product = opt.get();

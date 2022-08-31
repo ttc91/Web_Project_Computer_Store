@@ -18,7 +18,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @RequestMapping("/")
-    public String getCategoryPage(Model model){
+    public String getCategoryPage(Model model) {
 
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);

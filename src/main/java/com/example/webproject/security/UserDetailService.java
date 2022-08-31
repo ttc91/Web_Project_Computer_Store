@@ -23,17 +23,16 @@ public class UserDetailService implements UserDetailsService {
 
         User.UserBuilder builder = null;
 
-        if(customer !=null){
+        if (customer != null) {
 
             builder = org.springframework.security.core.userdetails.User.withUsername(customer.getCustomerPhoneNumber());
             builder.password(customer.getCustomerPassword());
 
             builder.roles("USER");
 
-        }else {
+        } else {
             throw new UsernameNotFoundException("User not found !");
         }
-
 
 
         return builder.build();
